@@ -15,20 +15,19 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA19WKLIDbUV2fCilZ3Gpf6V3OwvVyhVUA&callback=initMap"></script>    <link rel="stylesheet" href="../../recherche/out.css" />
 
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">-->
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+ <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
+   <link href="assets/css/style.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -36,8 +35,35 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    span #mapss{
+      position: static
+    }
+  </style>
+  <style>
+    #legend {
+      background: white;
+      padding: 10px;
+      margin: 10px;
+      border: 3px solid black;
+      font-size: 12px;
+    }
+    #legend h3 {
+      margin-top: 0;
+    }
+    #legend div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    #legend img {
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+  </style>
 </head>
-
 <body>
 
   <!-- ======= Header ======= -->
@@ -47,24 +73,16 @@
       <a href="accueil.html" class="logo d-flex align-items-center">
         <img src="assets/img/Panel Manager.png" alt="">
         <span class="d-none d-lg-block">Tableau De Bord</span>
-        
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-    
-        
-
           <!-- Search Icon-->
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
-         
           </a>
         </li><!-- End Search Icon-->
-
-
            <!--Profile Iamge Icon -->
         <li class="nav-item dropdown pe-3">
 
@@ -115,26 +133,19 @@
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
-
       </ul>
     </nav><!-- End Icons Navigation -->
-
   </header><!-- End Header -->
-
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-
       <li class="nav-item">
         <a class="nav-link collapsed " href="accueil.html">
           <i class="bi bi-grid"></i>
           <span>Accueil</span>
         </a>
       </li><!-- End Accueil Nav -->
-
         <!-- Gestion des panneaux Nav -->
-      
       <li class="nav-item">
         <a class="nav-link collapsed" href="Gestion-des-panneaux.html">
           <i class="bi bi-menu-button-wide"></i>
@@ -182,7 +193,7 @@
       </li><!-- End Profile Page Nav -->
 <!-- End Gestion des comptes Nav -->
       <li class="nav-item">
-        <a class="nav-link " href="Map.html">
+        <a class="nav-link collapsed" href="Map.html">
           <i class="bi bi-geo-alt"></i>
           <span>Couverture Map</span>
         </a>
@@ -201,69 +212,45 @@
           <span>Contact</span>
         </a>
       </li><!-- End Contact Page Nav -->
-
-
-
-
     </ul>
-
   </aside><!-- End Sidebar-->
-
-
-
  <!--Page Title -->   
  <main id="main" class="main">
-
     <div class="pagetitle">
-     
-      
     </div><!-- End Page Title -->
-
     <section class="section">
       <div class="row">
         <div class="col-mg-6">
-
           <div class="card">
             <div class="card-body">
-             
-
-              
                 <div class="container">
                     <div class="experience-content">
                             <div class="main-timeline">
                                 <br><br>
                                 <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-21d3e2e" data-id="21d3e2e" data-element_type="column">
-                <div class="elementor-widget-wrap elementor-element-populated">
-                                    <div class="elementor-element elementor-element-f2ea667 elementor-widget elementor-widget-html" data-id="f2ea667" data-element_type="widget" data-widget_type="html.default">
-                    <div class="elementor-widget-container">
-                        
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1EUHTq6fJZaMlW4XD1vL3lmlIDCrBF68w&amp;ehbc=2E312F" width="900" height="800"></iframe>      </div>
-                    </div>
+                      <div class="elementor-widget-wrap elementor-element-populated">
+                      <div class="elementor-element elementor-element-f2ea667 elementor-widget elementor-widget-html" data-id="f2ea667" data-element_type="widget" data-widget_type="html.default">
+                    <div class="elementor-widget-container"> 
+                     </div>
+                      </div>
                         </div>
                         <br>
-            </div>
+                             </div>
                             </div><!--.main-timeline-->
                         </div><!--.experience-content-->
                 </div>
             </div>
-
-
-
-
             </div>
           </div>
-
-          
-        </div>
+         </div>
       </div>
+      <span id="mapss" class="mapss"></span>
+
     </section>
-  </main><!-- End #main -->
-    
 
+  </main>
 
-
-
-
+  <!-- End #main -->
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
@@ -274,19 +261,13 @@
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div></strong>
     </div>
- 
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
       <a href="https://bootstrapmade.com/"></a>
     </div>
   </footer><!-- End Footer -->
-
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
   <!-- Vendor JS Files -->
+
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
@@ -295,12 +276,123 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-</body>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA19WKLIDbUV2fCilZ3Gpf6V3OwvVyhVUA&callback=initMap" ></script>
 
+
+<script>
+  async function fetchData() {
+      try {
+          const response = await fetch('http://localhost:3001/panneaux/');
+          const data = await response.json();
+          return data;
+      } catch (error) {
+          console.error('Error fetching data:', error);
+          throw error; // Rethrow the error to be caught by the caller
+      }
+  }
+
+
+
+
+  async function initMap() {
+    try {
+        const data = await fetchData();
+        console.log(data);
+
+        const mapContainer = document.getElementsByClassName('mapss')[0]; // Select the first element with class 'mapss'
+        const map = new google.maps.Map(mapContainer, {
+            center: { lat: 34.41, lng: 9.47 },
+            zoom: 7
+        });
+
+        const infowindow = new google.maps.InfoWindow();
+
+        // Add the legend to the map
+        const legend = document.getElementById('legend');
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
+        data.forEach((element) => {
+            console.log(element.position_x + element.position_Y + "");
+            let a;
+            switch (element.type) {
+                case "STATIQUE":
+                    a ="STATIQUE.png";
+                    break;
+                case "PALISSADE":
+                    a ="PALISSADE.png";
+                    break;
+                case "UNIPOLE":
+                    a ="UNIPOLE.png";
+                    break;
+                case "MUR":
+                    a ="MUR.png.PNG";
+                    break;
+                case "SUCETTE ABRIBUS":
+                    a ="SUCETTE ABRIBUS.png";
+                    break;
+                default:
+                    a ="http://maps.google.com/mapfiles/ms/icons/red.png";
+            }
+
+            const marker = new google.maps.Marker({
+                position: new google.maps.LatLng(element.position_x, element.position_Y),
+                map: map,
+                icon: a, // Make sure the path to marker.png is correct
+            });
+
+            google.maps.event.addListener(marker, "click", () => {
+                infowindow.setContent(
+                    "<b>" +
+                    element.regie +
+                    '- <font color ="red"> ' +
+                    element.code_face + '</font><font color ="blue"> ' +
+                    element.traffic + " /element.type</font>"
+                );
+                infowindow.open(map, marker);
+            });
+        });
+    } catch (error) {
+        console.error('Error initializing map:', error);
+    }
+}
+
+
+  window.onload = function() {
+// Get all elements with the class name
+var elements = document.getElementsByClassName("mapss");
+
+// Loop through each element and remove the attribute
+for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    element.removeAttribute("style");
+}
+
+    
+};
+setTimeout(() => {
+  var elements = document.getElementsByClassName("mapss");
+// Loop through each element and remove the attribute
+for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    element.removeAttribute("style");
+}
+}, 3000);
+</script>
+
+
+<div id="legend">
+  <h3>Légende des Panneaux</h3>
+  <div><img src="STATIQUE.png" alt="Statique"> Statique</div>
+  <div><img src="PALISSADE.png" alt="Palissade"> Palissade</div>
+  <div><img src="UNIPOLE.png" alt="Unipole"> Unipole</div>
+  <div><img src="MUR.png" alt="Mur"> Mur</div>
+  <div><img src="SUCETTE ABRIBUS.png" alt="Sucette Abribus"> Sucette Abribus</div>
+  <div><img src="http://maps.google.com/mapfiles/ms/icons/red.png" alt="Autres"> Autres</div>
+</div>
+</body>
 </html>
 
 

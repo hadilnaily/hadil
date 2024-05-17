@@ -2,8 +2,13 @@
 const express = require ("express");
 const bodyParser = require ("body-parser");
 const cors = require('cors');
+const multer = require('multer');
+const upload = multer ();//initialize multer
 const app = express();
 app.use(cors()); // enable CORS for all routes
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(upload.none());//parse multipart/form-data bodies
 
 
 
@@ -26,11 +31,20 @@ const ArchiveModel = require('./models/Archives')
 //IMPORT USERS MODEL
 const UserModel = require('./models/Users')
 
-//IMPORT ADministrateurs MODEL
+//IMPORT Administrateurs MODEL
 const AdministrateurModel = require('./models/Administrateurs')
 
 //IMPORT contact MODEL
 const ContactModel = require('./models/Contacts')
+
+//IMPORT archivespanneaux MODEL
+const ArchivespanneauModel = require('./models/Archivespanneaux')
+
+//IMPORT archivescompagnes MODEL
+const ArchivescompagneModel = require('./models/Archivescompagnes')
+
+//IMPORT contact MODEL
+const CompteModel = require('./models/Comptes')
 
 
 
@@ -60,6 +74,15 @@ app.use('/contacts',getContacts)
 const getStatistic = require ('./routers/statistics');
 app.use('/statistic',getStatistic)
 
+const getArchivesPanneaux = require ('./routers/archivespaneauxRouter');
+app.use('/archivespanneaux',getArchivesPanneaux)
+
+const getArchivesCompagnes = require ('./routers/archivescompagnesRouter');
+app.use('/archivescompagnes',getArchivesCompagnes)
+
+
+const getComptes = require ('./routers/comptesRouter');
+app.use('/comptes',getComptes)
 
 
 

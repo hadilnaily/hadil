@@ -226,6 +226,193 @@
 
             <!-- Table with stripped rows -->
             <table class="table datatable" id="compagnesTable">
+
+              <br> <br>
+              <div class="text-center">
+
+
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Ajouter">
+                  <i class="bi bi-plus"></i> Ajouter
+                </button>
+                
+                <div class="modal fade" id="Ajouter" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="ajouterForm">
+                          <div class="mb-3">
+                            <label for="nom-annonceur" class="form-label">Nom Annonceur:</label>
+                            <input type="text" id="nom_annanceur" class="form-control" name="nom_annanceur" required />
+                          </div>
+                          <div class="mb-3">
+                            <label for="type-publication" class="form-label">Type Publication:</label>
+                            <input type="text" id="type_publication" class="form-control" name="type_publication" required />
+                          </div>
+                          <div class="mb-3">
+                            <label for="date-publication" class="form-label">Date Publication:</label>
+                            <input type="date" id="date_publication" class="form-control" name="date_publication" required />
+                          </div>
+                          <div class="mb-3">
+                            <label for="date-retrait" class="form-label">Date Retrait:</label>
+                            <input type="date" id="date_retrait" class="form-control" name="date_retrait" required />
+                          </div>
+                          <div class="mb-3">
+                            <label for="photo" class="form-label">Photo:</label>
+                            <input type="text" id="photo" class="form-control" name="photo" required />
+                          </div>
+                          <div class="mb-3">
+                            <label for="media-vusiel" class="form-label">Média Vusiel:</label>
+                            <input type="text" id="media_vusiel" class="form-control" name="media_vusiel" required />
+                          </div>
+                          
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" id="submitButton" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
+                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+  
+  
+  
+  
+  <!-- Bouton pour ouvrir la fenêtre de confirmation de modification -->
+  <button type="button" class="btn btn-warning" onclick="openModifierModal()">
+    <i class="bi bi-pencil"></i> Modifier
+  </button>
+                 <!-- code  de la confirmation de modifier -->
+                 <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="modificationForm">
+                          <div class="mb-3">
+                            <label for="editNomAnnanceur" class="form-label">Nom Annanceur</label>
+                            <input type="text" class="form-control" id="editNomAnnanceur">
+                          </div>
+                          <div class="mb-3">
+                            <label for="editTypePublication" class="form-label">Type Publication</label>
+                            <input type="text" class="form-control" id="editTypePublication">
+                          </div>
+                          <div class="mb-3">
+                            <label for="editDatePublication" class="form-label">Date Publication</label>
+                            <input type="text" class="form-control" id="editDatePublication">
+                          </div>
+                          <div class="mb-3">
+                            <label for="editDateRetrait" class="form-label">Date Retrait</label>
+                            <input type="text" class="form-control" id="editDateRetrait">
+                          </div>
+                          <div class="mb-3">
+                            <label for="editPhoto" class="form-label">Photo</label>
+                            <input type="text" class="form-control" id="editPhoto">
+                          </div>
+                          <div class="mb-3">
+                            <label for="editMediaVusiel" class="form-label">Média Vusiel</label>
+                            <input type="text" class="form-control" id="editMediaVusiel">
+                          </div>
+                          <!-- Ajoutez d'autres champs de formulaire pour Date de création et Date de modification -->
+                          
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                
+                <!-- Vos autres éléments HTML -->
+                
+                <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
+                <script>
+                  function openModifierModal() {
+                    // Vérifier si la case à cocher est cochée
+                    var checkboxChecked = $("#compagnesTable tbody input[type='checkbox']:checked").length > 0;
+                
+                    if (checkboxChecked) {
+                      // Si la case est cochée, afficher la modale de modification
+                      $('#modifierModal').modal('show');
+                    } else {
+                      // Si la case n'est pas cochée, afficher un message d'erreur
+                      alert("Veuillez cocher au moins une case avant de modifier.");
+                    }
+                  }
+                </script>
+  
+                
+                 <!-- code  de la confirmation de suppression -->
+  <button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
+    <i class="bi bi-trash"></i> Supprimer
+  </button>
+  <!-- Fenêtre de confirmation de suppression -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </section>
+  
+  </main><!-- End #main -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function deleteAction() {
+      // Vérifier si au moins une case est cochée
+      var atLeastOneChecked = $("#compagnesTable tbody input[type='checkbox']:checked").length > 0;
+      
+      if (!atLeastOneChecked) {
+        // Si aucune case n'est cochée, afficher un message d'erreur
+        alert("Veuillez cocher au moins une case avant de supprimer.");
+      } else {
+        // Si au moins une case est cochée, afficher la fenêtre de confirmation
+        $('#confirmDeleteModal').modal('show');
+      }
+    }
+  
+    // Fonction pour confirmer la suppression
+    function confirmDelete() {
+      // Supprimer les lignes sélectionnées du tableau
+      $("#compagnesTable tbody input[type='checkbox']:checked").each(function() {
+        $(this).closest('tr').remove();
+      });
+      
+      // Masquer la fenêtre modale
+      $('#confirmDeleteModal').modal('hide');
+    }
+  </script>
+
+  <br>
               <thead>
                 <tr>
                   <th>   </th>
@@ -243,203 +430,7 @@
              
             </table>
             <!-- End Table with stripped rows -->
-            <div class="text-center">
-
-
-              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Ajouter">
-                <i class="bi bi-plus"></i> Ajouter
-              </button>
-              
-              <div class="modal fade" id="Ajouter" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <label for="nom-annonceur" class="form-label">Nom Annonceur:</label>
-                          <input type="text" id="nom-annonceur" class="form-control" name="nom-annonceur" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="type-publication" class="form-label">Type Publication:</label>
-                          <input type="text" id="type-publication" class="form-control" name="type-publication" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="date-publication" class="form-label">Date Publication:</label>
-                          <input type="date" id="date-publication" class="form-control" name="date-publication" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="date-retrait" class="form-label">Date Retrait:</label>
-                          <input type="date" id="date-retrait" class="form-control" name="date-retrait" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="photo" class="form-label">Photo:</label>
-                          <input type="text" id="photo" class="form-control" name="photo" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="media-vusiel" class="form-label">Média Vusiel:</label>
-                          <input type="text" id="media-vusiel" class="form-control" name="media-vusiel" required />
-                        </div>
-                        <div>
-                          <label for="creation" class="form-label">Date de Création:</label>
-                          <input type="date" id="creation" class="form-control" name="creation" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="modification" class="form-label">Date de Modification:</label>
-                          <input type="date" id="modification" class="form-control" name="modification" required />
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
-                    
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-
-
-
-
-<!-- Bouton pour ouvrir la fenêtre de confirmation de modification -->
-<button type="button" class="btn btn-warning" onclick="openModifierModal()">
-  <i class="bi bi-pencil"></i> Modifier
-</button>
-               <!-- code  de la confirmation de modifier -->
-               <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form id="modificationForm">
-                        <div class="mb-3">
-                          <label for="editNomAnnanceur" class="form-label">Nom Annanceur</label>
-                          <input type="text" class="form-control" id="editNomAnnanceur">
-                        </div>
-                        <div class="mb-3">
-                          <label for="editTypePublication" class="form-label">Type Publication</label>
-                          <input type="text" class="form-control" id="editTypePublication">
-                        </div>
-                        <div class="mb-3">
-                          <label for="editDatePublication" class="form-label">Date Publication</label>
-                          <input type="text" class="form-control" id="editDatePublication">
-                        </div>
-                        <div class="mb-3">
-                          <label for="editDateRetrait" class="form-label">Date Retrait</label>
-                          <input type="text" class="form-control" id="editDateRetrait">
-                        </div>
-                        <div class="mb-3">
-                          <label for="editPhoto" class="form-label">Photo</label>
-                          <input type="text" class="form-control" id="editPhoto">
-                        </div>
-                        <div class="mb-3">
-                          <label for="editMediaVusiel" class="form-label">Média Vusiel</label>
-                          <input type="text" class="form-control" id="editMediaVusiel">
-                        </div>
-                        <!-- Ajoutez d'autres champs de formulaire pour Date de création et Date de modification -->
-                        <div class="mb-3">
-                          <label for="editDateCreation" class="form-label">Date de création</label>
-                          <input type="text" class="form-control" id="editDateCreation" disabled>
-                        </div>
-                        <div class="mb-3">
-                          <label for="editDateModification" class="form-label">Date de modification</label>
-                          <input type="text" class="form-control" id="editDateModification" disabled>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              
-              <!-- Vos autres éléments HTML -->
-              
-              <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
-              <script>
-                function openModifierModal() {
-                  // Vérifier si la case à cocher est cochée
-                  var checkboxChecked = $("#compagnesTable tbody input[type='checkbox']:checked").length > 0;
-              
-                  if (checkboxChecked) {
-                    // Si la case est cochée, afficher la modale de modification
-                    $('#modifierModal').modal('show');
-                  } else {
-                    // Si la case n'est pas cochée, afficher un message d'erreur
-                    alert("Veuillez cocher au moins une case avant de modifier.");
-                  }
-                }
-              </script>
-
-              
-               <!-- code  de la confirmation de suppression -->
-<button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
-  <i class="bi bi-trash"></i> Supprimer
-</button>
-<!-- Fenêtre de confirmation de suppression -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-</main><!-- End #main -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-  function deleteAction() {
-    // Vérifier si au moins une case est cochée
-    var atLeastOneChecked = $("#compagnesTable tbody input[type='checkbox']:checked").length > 0;
-    
-    if (!atLeastOneChecked) {
-      // Si aucune case n'est cochée, afficher un message d'erreur
-      alert("Veuillez cocher au moins une case avant de supprimer.");
-    } else {
-      // Si au moins une case est cochée, afficher la fenêtre de confirmation
-      $('#confirmDeleteModal').modal('show');
-    }
-  }
-
-  // Fonction pour confirmer la suppression
-  function confirmDelete() {
-    // Supprimer les lignes sélectionnées du tableau
-    $("#compagnesTable tbody input[type='checkbox']:checked").each(function() {
-      $(this).closest('tr').remove();
-    });
-    
-    // Masquer la fenêtre modale
-    $('#confirmDeleteModal').modal('hide');
-  }
-</script>
+        
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -474,7 +465,7 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  
 
 </body>
 <script>
@@ -504,7 +495,7 @@
                   <td>${compagne.type_publication}</td>
                   <td>${compagne.date_publication}</td>
                   <td>${compagne.date_retrait}</td>
-                  <td>${compagne.photo}</td>
+                  <td><img src="${compagne.photo}" style="max-width: 100px; max-height: 100px;"></td>
                   <td>${compagne.media_vusiel}</td>
                   <td>${compagne.cree_a}</td>
                   <td>${compagne.mis_a_jour_a}</td>
@@ -515,8 +506,42 @@
           console.error('Error populating table:', error);
       }
   }
+  // Fonction pour récupérer les données depuis le serveur
+
 
   populateTable(); // nedi el function  populateTable() awel ma tet7al el page automatique
   </script>
+
+
+
+<!-- fonction ajouter -->
+<script>
+  document.getElementById('submitButton').addEventListener('click', async function(event) {
+    event.preventDefault(); // Prevent the default button behavior
+  
+    const formData = new FormData(document.getElementById('ajouterForm')); // Create a FormData object from the form
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+    try {
+      const response = await fetch('http://localhost:3001/compagnes/', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Compagnes added successfully:', data);
+        window.location.href = 'Gestion-des-compagnes.html';
+      } else {
+        console.error('Failed to add compagnes:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding compagne:', error);
+    }
+  });
+    
+    
+    </script>
 
 </html>

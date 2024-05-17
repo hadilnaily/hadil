@@ -24,7 +24,7 @@ const PanneauSchema = new mongoose.Schema({
         type: String,
     },
     eclairage:{
-        type: Boolean,
+        type: String,
     },
     visibilite:{
         type: String,

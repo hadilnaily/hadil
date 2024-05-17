@@ -9,83 +9,6 @@ router.get("/", async (req, res)=>{
     res.json(panneaux)
 })
 
-router.get('/zone/:zone', async (req, res) => {
-    try {
-        const panneau = await PanneauModel.findOne({ zone: req.params.zone });
-        if (!panneau) {
-            return res.status(404).json({ message: 'The panneau with the given zone was not found.' });
-        }
-        res.status(200).json(panneau);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-router.get('/region/:region', async (req, res) => {
-    try {
-        const panneau = await PanneauModel.findOne({ region: req.params.region });
-        if (!panneau) {
-            return res.status(404).json({ message: 'The panneau with the given region was not found.' });
-        }
-        res.status(200).json(panneau);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-router.get('/emplacement/:emplacement', async (req, res) => {
-    try {
-        const panneau = await PanneauModel.findOne({ emplacement: req.params.emplacement });
-        if (!panneau) {
-            return res.status(404).json({ message: 'The panneau with the given emplacement was not found.' });
-        }
-        res.status(200).json(panneau);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-router.get('/regie/:regie', async (req, res) => {
-    try {
-        const panneau = await PanneauModel.findOne({ regie: req.params.regie });
-        if (!panneau) {
-            return res.status(404).json({ message: 'The panneau with the given regie was not found.' });
-        }
-        res.status(200).json(panneau);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-router.get('/type/:type', async (req, res) => {
-    try {
-        const panneau = await PanneauModel.findOne({ type: req.params.type });
-        if (!panneau) {
-            return res.status(404).json({ message: 'The panneau with the given type was not found.' });
-        }
-        res.status(200).json(panneau);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-router.get('/face/:face', async (req, res) => {
-    try {
-        const panneau = await PanneauModel.findOne({ face: req.params.face });
-        if (!panneau) {
-            return res.status(404).json({ message: 'The panneau with the given face was not found.' });
-        }
-        res.status(200).json(panneau);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
 
 //POST ajouter panneaux
 router.post('/', async (req, res) => {
@@ -105,6 +28,7 @@ router.post('/', async (req, res) => {
         photo: req.body.photo,
         position_x: req.body.position_x,
         position_y: req.body.position_y,
+        
         cree_a: new Date().toISOString(), // Set current date/time as creation date
         mis_a_jour_a: null // No update date initially
     });

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Liste_des_cpmpagnes</title>
+  <title>Liste_des_compagnes</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <!-- Favicons -->
@@ -36,37 +36,10 @@
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
-                            <table class="table table-striped">
-                              <thead>
-                        <tr>
-                          <th scope="col">Photo</th>
-                          <th scope="col">Statut</th>
-                          <th scope="col">Regie</th>
-                          <th data-type="date" data-format="YYYY/DD/MM">Date Publication</th>
-                          <th data-type="date" data-format="YYYY/DD/MM">Date de Retrait</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/img1.jpg" alt=""class="img-fluid"></a></th>
-                          <td><a href="#" class="text-primary fw-bold"></a>Terminé</td>
-                          <td >Oméga.Pub</td>
-                          <td data-type="date" data-format="YYYY/DD/MM">01/02/2024</td>
-                          <td data-type="date" data-format="YYYY/DD/MM">01/03/2024</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/img3.jpg" alt=""class="img-fluid"></a></th>
-                          <td><a href="#" class="text-primary fw-bold"></a>Terminé</td>
-                          <td >Oméga.Pub</td>
-                          <td data-type="date" data-format="YYYY/DD/MM">01/02/2024</td>
-                          <td data-type="date" data-format="YYYY/DD/MM">01/03/2024</td>
-                        </tr>
-                     <!-- Add more rows as needed -->
-                        </tbody>
-                      </table>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-               <!-- code  de la confirmation Ajouter -->
+                            <table class="table table-striped" id="archivescompagnesTable">
+                              <br> <br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <!-- code  de la confirmation Ajouter -->
                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Ajouter">
                 <i class="bi bi-plus"></i> Ajouter
               </button>
@@ -77,37 +50,39 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                     </div>
                     <div class="modal-body">
-                      <form>
+                      <form id="ajouterForm">
                         <div class="mb-3">
-                          <label for="editPhoto" class="form-label">Photo</label>
-                          <input type="image" class="form-control" id="editPhoto">
+                          <label for="photo" class="form-label">Photo:</label>
+                          <input type="text" id="photo" class="form-control" name="photo" required />
                         </div>
                         <div class="mb-3">
-                          <label for="editStatu" class="form-label">Statu</label>
-                          <input type="text" class="form-control" id="editStatu">
+                          <label for="nom-annonceur" class="form-label">Nom Annonceur:</label>
+                          <input type="text" id="nom_annanceur" class="form-control" name="nom_annanceur" required />
                         </div>
                         <div class="mb-3">
-                          <label for="editRegie" class="form-label">Regie</label>
-                          <input type="text" class="form-control" id="editRegie">
+                          <label for="media-vusiel" class="form-label">Média Vusiel:</label>
+                          <input type="text" id="media_vusiel" class="form-control" name="media_vusiel" required />
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="date-publication" class="form-label">Date Publication:</label>
+                          <input type="date" id="date_publication" class="form-control" name="date_publication" required />
                         </div>
                         <div class="mb-3">
-                          <label for="editDatePublication" class="form-label">Date Publication</label>
-                          <input type="text" class="form-control" id="editDatePublication" >
-                        </div>
-                        <div class="mb-3">
-                          <label for="DateRetrait" class="form-label">Date Retrait</label>
-                          <input type="text" class="form-control" id="DateRetrait" >
+                          <label for="date-retrait" class="form-label">Date Retrait:</label>
+                          <input type="date" id="date_retrait" class="form-control" name="date_retrait" required />
                         </div>
                       </form>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
+                      <button type="button" id="submitButton" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
                       
                     </div>
                   </div>
                 </div>
               </div>
+              &nbsp;&nbsp;
 
               <!-- code  de la confirmation de modifier -->
               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Modifier">
@@ -126,12 +101,12 @@
                           <input type="image" class="form-control" id="editPhoto">
                         </div>
                         <div class="mb-3">
-                          <label for="editStatu" class="form-label">Statu</label>
-                          <input type="text" class="form-control" id="editStatu">
+                          <label for="editNomAnnanceur" class="form-label">Nom Annanceur</label>
+                          <input type="text" class="form-control" id="editNomAnnanceur">
                         </div>
                         <div class="mb-3">
-                          <label for="editRegie" class="form-label">Regie</label>
-                          <input type="text" class="form-control" id="editRegie">
+                          <label for="media-vusiel" class="form-label">Média Vusiel:</label>
+                          <input type="text" id="media-vusiel" class="form-control" name="media-vusiel" required />
                         </div>
                         <div class="mb-3">
                           <label for="editDatePublication" class="form-label">Date Publication</label>
@@ -151,6 +126,7 @@
                   </div>
                 </div>
               </div>
+              &nbsp;&nbsp;
 
 
                <!-- code  de la confirmation de suppression -->
@@ -175,6 +151,25 @@
                 </div>
               </div>  
          <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
+         <br>
+         <br>
+                              <thead>
+                        <tr>
+                          <th></th>
+                          <th scope="col">Photo</th>
+                          <th scope="col">Nom Annanceur</th>
+                          <th scope="col">Média Vusiel</th>
+                          <th data-type="date" data-format="YYYY/DD/MM">Date Publication</th>
+                          <th data-type="date" data-format="YYYY/DD/MM">Date de Retrait</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                     <!-- Add more rows as needed -->
+                        </tbody>
+                      </table>
+                      
+
+
 
 
 
@@ -203,5 +198,74 @@
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<script>
+  // Fetch data mta3 el compagnes from the server
+  async function fetchData() {
+      try {
+          const response = await fetch('http://localhost:3001/archivescompagnes/');
+          const data = await response.json();
+          return data;
+      } catch (error) {
+          console.error('Error fetching data:', error);
+          throw error; // bech n tcheki si famma erreur
+      }
+  }
+
+  // Populate the table with fetched data
+  async function populateTable() {
+      try {
+          const data = await fetchData();
+          const tableBody = document.querySelector('#archivescompagnesTable tbody');
+
+          data.forEach(function (archivescompagne) {
+              var row = document.createElement('tr');
+              row.innerHTML = `
+                  <td><input type="checkbox"</td>
+                  <td><img src="${archivescompagne.photo}" style="max-width: 100px; max-height: 100px;"></td>
+                  <td>${archivescompagne.nom_annanceur}</td>
+                  <td>${archivescompagne.media_vusiel}</td>
+                  <td>${archivescompagne.date_publication}</td>
+                  <td>${archivescompagne.date_retrait}</td>
+              `;
+              tableBody.appendChild(row);
+          });
+      } catch (error) {
+          console.error('Error populating table:', error);
+      }
+  }
+
+  populateTable(); // nedi el function  populateTable() awel ma tet7al el page automatique
+  </script>
+
+
+<!-- fonction ajouter -->
+<script>
+  document.getElementById('submitButton').addEventListener('click', async function(event) {
+    event.preventDefault(); // Prevent the default button behavior
+  
+    const formData = new FormData(document.getElementById('ajouterForm')); // Create a FormData object from the form
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+    try {
+      const response = await fetch('http://localhost:3001/archivescompagnes/', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Panneau added successfully:', data);
+        window.location.href = 'ArchivesCompagnes.html';
+      } else {
+        console.error('Failed to add archives compagnes:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding archives compagnes:', error);
+    }
+  });
+    
+    
+    </script>
 
 </html>

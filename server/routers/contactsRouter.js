@@ -17,10 +17,10 @@ router.post('/', async (req, res) => {
         const contact = new ContactModel({
             nom: req.body.nom,
             email: req.body.email,
+            Telephone: req.body.Telephone,
             sujet: req.body.sujet,
             message: req.body.message,
-            emetteur: req.body.emetteur,
-            recepteur: req.body.recepteur
+            date_envoi: new Date().toISOString(),
         });
         const savedContact = await contact.save();
         res.status(201).json(savedContact);

@@ -7,6 +7,10 @@ const ContactSchema = new mongoose.Schema({
     email: {
         type: String,
     },
+    Telephone: {
+        type: String,
+
+    },
     sujet: {
         type: String,
     },
@@ -18,6 +22,9 @@ const ContactSchema = new mongoose.Schema({
     },
     recepteur: {
         type: String,
+    },
+    date_envoi: {
+        type:String,
     }
 });
 

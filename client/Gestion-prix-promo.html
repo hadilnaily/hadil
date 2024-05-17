@@ -224,6 +224,173 @@
               
               <!-- Table with stripped rows -->
               <table class="table datatable" id="prixTable">
+
+                <br> <br>
+                <div class="text-center">
+                  <!-- code  de la confirmation de Ajouter -->
+                  <div class="text-center">
+                    <!-- code  de la confirmation de Ajouter -->
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Ajouter">
+                      <i class="bi bi-plus"></i> Ajouter
+                    </button>
+                    
+                    <div class="modal fade" id="Ajouter" tabindex="-1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form id="ajouterForm">
+                              <div class="mb-3">
+                                <label for="Date-Deb-Promo"  class="form-label">Date Début Promo</label>
+                                <input type="date" id="date_deb_promo" class="form-control" name="date_deb_promo" required>
+                              </div>
+                              <div>
+                                <label for="date-fin" class="form-label">Date Fin Promo:</label>
+                                <input type="date" id="date_fin_promo" class="form-control" name="date_fin_promo" required />
+                              </div>
+                              <div>
+                                <label for="prix-native" class="form-label">Prix Native:</label>
+                                <input type="text" id="prix_native" class="form-control" name="prix_native" required />
+                              </div>
+                              <div>
+                                <label for="promo" class="form-label">Promo:</label>
+                                <input type="text" id="promo" class="form-control" name="promo" required />
+                              </div>
+                              <div>
+                                <label for="prix-promo" class="form-label">Prix Promo:</label>
+                                <input type="text" id="prix_promotion" class="form-control" name="prix_promotion" required />
+                              </div>
+                              
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" id="submitButton" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
+                          
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+  <!-- Bouton pour ouvrir la fenêtre de confirmation de modification -->
+  
+  <button type="button" class="btn btn-warning" onclick="openModifierModal()">
+    <i class="bi bi-pencil"></i> Modifier
+  </button>
+  <!-- Fenêtre modale de confirmation de modification -->
+  <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <form id="modificationForm">
+            <div class="mb-3">
+              <label for="dateDebutPromo" class="form-label">Date Début Promo:</label>
+              <input type="text" class="form-control" id="dateDebutPromo" name="dateDebutPromo" >
+            </div>
+            <div class="mb-3">
+              <label for="dateFinPromo" class="form-label">Date Fin Promo:</label>
+              <input type="text" class="form-control" id="dateFinPromo" name="dateFinPromo">
+            </div>
+            <div class="mb-3">
+              <label for="prixNative" class="form-label">Prix Native:</label>
+              <input type="text" class="form-control" id="prixNative" name="prixNative" >
+            </div>
+            <div class="mb-3">
+              <label for="promo" class="form-label">Promo:</label>
+              <input type="text" class="form-control" id="promo" name="promo" >
+            </div>
+            <div class="mb-3">
+              <label for="prixPromotion" class="form-label">Prix Promotion:</label>
+              <input type="text" class="form-control" id="prixPromotion" name="prixPromotion" >
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
+  <script>
+    function openModifierModal() {
+      // Vérifier si la case à cocher est cochée
+      var checkboxChecked = $("#prixTable tbody input[type='checkbox']:checked").length > 0;
+  
+      if (checkboxChecked) {
+        // Si la case est cochée, afficher la modale de modification
+        $('#modifierModal').modal('show');
+      } else {
+        // Si la case n'est pas cochée, afficher un message d'erreur
+        alert("Veuillez cocher au moins une case avant de modifier.");
+      }
+    }
+  </script>
+               
+  <!-- Bouton pour supprimer -->
+  
+  <button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
+    <i class="bi bi-trash"></i> Supprimer
+  </button>
+  <!-- Fenêtre de confirmation de suppression -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+              </section>
+            </main><!-- End #main -->
+          <!-- code pour la supprimer -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+              function deleteAction() {
+                // Vérifier si au moins une case est cochée
+                var atLeastOneChecked = $("#prixTable tbody input[type='checkbox']:checked").length > 0;
+                
+                if (!atLeastOneChecked) {
+                  // Si aucune case n'est cochée, afficher un message d'erreur
+                  alert("Veuillez cocher au moins une case avant de supprimer.");
+                } else {
+                  // Si au moins une case est cochée, afficher la fenêtre de confirmation
+                  $('#confirmDeleteModal').modal('show');
+                }
+              }
+            
+              // Fonction pour confirmer la suppression
+              function confirmDelete() {
+                // Supprimer les lignes sélectionnées du tableau
+                $("#prixTable tbody input[type='checkbox']:checked").each(function() {
+                  $(this).closest('tr').remove();
+                });
+                
+                // Masquer la fenêtre modale
+                $('#confirmDeleteModal').modal('hide');
+              }
+            </script>
+
+            <br>
+            <br>
+            
                 <thead>
                   <tr>
                     <th></th>
@@ -239,182 +406,7 @@
                 <tbody></tbody>
                
               </table>
-              <div class="text-center">
-                <!-- code  de la confirmation de Ajouter -->
-                <div class="text-center">
-                  <!-- code  de la confirmation de Ajouter -->
-                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Ajouter">
-                    <i class="bi bi-plus"></i> Ajouter
-                  </button>
-                  
-                  <div class="modal fade" id="Ajouter" tabindex="-1">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form>
-                            <div class="mb-3">
-                              <label for="Date-Deb-Promo"  class="form-label">Date Début Promo</label>
-                              <input type="date" id="Date-Deb-Promo" class="form-control" name="Date-Deb-Promo">
-                            </div>
-                            <div>
-                              <label for="date-fin" class="form-label">Date Fin Promo:</label>
-                              <input type="date" id="date-fin" class="form-control" name="date-fin" required />
-                            </div>
-                            <div>
-                              <label for="prix-native" class="form-label">Prix Native:</label>
-                              <input type="text" id="prix-native" class="form-control" name="prix-native" required />
-                            </div>
-                            <div>
-                              <label for="promo" class="form-label">Promo:</label>
-                              <input type="text" id="promo" class="form-control" name="promo" required />
-                            </div>
-                            <div>
-                              <label for="prix-promo" class="form-label">Prix Promo:</label>
-                              <input type="text" id="prix-promo" class="form-control" name="prix-promo" required />
-                            </div>
-                            <div>
-                              <label for="creation" class="form-label">Date de Création:</label>
-                              <input type="date" id="creation" class="form-control" name="creation" required />
-                            </div>
-                            <div class="mb-3">
-                              <label for="modification" class="form-label">Date de Modification:</label>
-                              <input type="date" id="modification" class="form-control" name="modification" required />
-                            </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
-                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
-                        
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                
-<!-- Bouton pour ouvrir la fenêtre de confirmation de modification -->
 
-<button type="button" class="btn btn-warning" onclick="openModifierModal()">
-  <i class="bi bi-pencil"></i> Modifier
-</button>
-<!-- Fenêtre modale de confirmation de modification -->
-<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-      </div>
-      <div class="modal-body">
-        <form id="modificationForm">
-          <div class="mb-3">
-            <label for="dateDebutPromo" class="form-label">Date Début Promo:</label>
-            <input type="text" class="form-control" id="dateDebutPromo" name="dateDebutPromo" >
-          </div>
-          <div class="mb-3">
-            <label for="dateFinPromo" class="form-label">Date Fin Promo:</label>
-            <input type="text" class="form-control" id="dateFinPromo" name="dateFinPromo">
-          </div>
-          <div class="mb-3">
-            <label for="prixNative" class="form-label">Prix Native:</label>
-            <input type="text" class="form-control" id="prixNative" name="prixNative" >
-          </div>
-          <div class="mb-3">
-            <label for="promo" class="form-label">Promo:</label>
-            <input type="text" class="form-control" id="promo" name="promo" >
-          </div>
-          <div class="mb-3">
-            <label for="prixPromotion" class="form-label">Prix Promotion:</label>
-            <input type="text" class="form-control" id="prixPromotion" name="prixPromotion" >
-          </div>
-          <div class="mb-3">
-            <label for="dateCreation" class="form-label">Date de création:</label>
-            <input type="text" class="form-control" id="dateCreation" name="dateCreation" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="dateModification" class="form-label">Date De Modification:</label>
-            <input type="text" class="form-control" id="dateModification" name="dateModification" readonly>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
-<script>
-  function openModifierModal() {
-    // Vérifier si la case à cocher est cochée
-    var checkboxChecked = $("#prixTable tbody input[type='checkbox']:checked").length > 0;
-
-    if (checkboxChecked) {
-      // Si la case est cochée, afficher la modale de modification
-      $('#modifierModal').modal('show');
-    } else {
-      // Si la case n'est pas cochée, afficher un message d'erreur
-      alert("Veuillez cocher au moins une case avant de modifier.");
-    }
-  }
-</script>
-             
-<!-- Bouton pour supprimer -->
-
-<button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
-  <i class="bi bi-trash"></i> Supprimer
-</button>
-<!-- Fenêtre de confirmation de suppression -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
-            </section>
-          </main><!-- End #main -->
-        <!-- code pour la supprimer -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-          <script>
-            function deleteAction() {
-              // Vérifier si au moins une case est cochée
-              var atLeastOneChecked = $("#prixTable tbody input[type='checkbox']:checked").length > 0;
-              
-              if (!atLeastOneChecked) {
-                // Si aucune case n'est cochée, afficher un message d'erreur
-                alert("Veuillez cocher au moins une case avant de supprimer.");
-              } else {
-                // Si au moins une case est cochée, afficher la fenêtre de confirmation
-                $('#confirmDeleteModal').modal('show');
-              }
-            }
-          
-            // Fonction pour confirmer la suppression
-            function confirmDelete() {
-              // Supprimer les lignes sélectionnées du tableau
-              $("#prixTable tbody input[type='checkbox']:checked").each(function() {
-                $(this).closest('tr').remove();
-              });
-              
-              // Masquer la fenêtre modale
-              $('#confirmDeleteModal').modal('hide');
-            }
-          </script>
-          
        
           
    <!-- ======= Footer ======= -->
@@ -450,7 +442,8 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  
+  
 
 </body>
 <script>
@@ -493,5 +486,35 @@
 
   populateTable(); // nedi el function  populateTable() awel ma tet7al el page automatique
   </script>
+
+  <!-- fonction ajouter -->
+<script>
+  document.getElementById('submitButton').addEventListener('click', async function(event) {
+    event.preventDefault(); // Prevent the default button behavior
+  
+    const formData = new FormData(document.getElementById('ajouterForm')); // Create a FormData object from the form
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+    try {
+      const response = await fetch('http://localhost:3001/prix/', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Panneau added successfully:', data);
+        window.location.href = 'Gestion-prix-promo.html';
+      } else {
+        console.error('Failed to add prix:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding prix:', error);
+    }
+  });
+    
+    
+    </script>
 
 </html>

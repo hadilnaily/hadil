@@ -230,6 +230,264 @@
 
               <!-- Table with stripped rows -->
               <table class="table datatable" id="panneauxTable">
+                <br><br>
+                              <!-- End Table with stripped rows -->
+              <div class="text-center">
+               
+                <!-- code  de la confirmation de Ajouter -->
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Ajouter">
+                  <i class="bi bi-plus"></i> Ajouter
+                </button>
+                
+                <div class="modal fade" id="Ajouter" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="ajouterForm">
+                          <div>
+                            <label for="code Face" class="form-label">Code Face:</label>
+                            <input type="text" id="code_face" class="form-control" name="code_face" required />
+                          </div>
+                          <div>
+                            <label for="zone" class="form-label">Zone:</label>
+                            <input type="text" id="zone" class="form-control" name="zone" required />
+                          </div>
+                          <div>
+                            <label for="région" class="form-label">Région:</label>
+                            <input type="text" id="region" class="form-control" name="region" required />
+                          </div>
+                          <div>
+                            <label for="emplacement" class="form-label">Emplacement:</label>
+                            <input type="text" id="emplacement" class="form-control" name="emplacement" required />
+                          </div>
+                          <div>
+                            <label for="régie" class="form-label">Régie:</label>
+                            <input type="text" id="regie" class="form-control" name="regie" required />
+                          </div>
+                          <div>
+                            <label for="type" class="form-label">Type:</label>
+                            <input type="text" id="type" class="form-control" name="type" required />
+                          </div>
+                          <div>
+                            <label for="face" class="form-label">Face:</label>
+                            <input type="text" id="face" class="form-control" name="face" required />
+                          </div>
+                          <div>
+                            <label for="eclairage" class="form-label">Eclairage:</label>
+                            <input type="text" id="eclairage" class="form-control" name="eclairage" required />
+                          </div>
+                          <div>
+                            <label for="visibilité" class="form-label">Visibilité:</label>
+                            <input type="text" id="visibilite" class="form-control" name="visibilite" required />
+                          </div>
+                          <div>
+                            <label for="métrage" class="form-label">Métrage:</label>
+                            <input type="text" id="metrage" class="form-control" name="metrage" required />
+                          </div>
+                          <div>
+                            <label for="prix" class="form-label">Prix:</label>
+                            <input type="text" id="prix" class="form-control" name="prix" required />
+                          </div>
+                          <div>
+                            <label for="trafic routier" class="form-label">Trafic Routier:</label>
+                            <input type="text" id="trafic_routier" class="form-control" name="trafic_routier" required />
+                          </div>
+                          <div>
+                            <label for="photo" class="form-label">Photo:</label>
+                            <input type="text" id="photo" class="form-control" name="photo" required />
+                          </div>
+                          <div>
+                            <label for="position x" class="form-label">Position X:</label>
+                            <input type="text" id="position_x" class="form-control" name="position_x" required />
+                          </div>
+                          <div>
+                            <label for="position y" class="form-label">Position Y:</label>
+                            <input type="text" id="position_y" class="form-control" name="position_y" required />
+                          </div>
+                         
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" id="submitButton" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
+                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+             <!-- code  de la confirmation de modifier -->
+             <button type="button" class="btn btn-warning" onclick="openModifierModal()">
+              <i class="bi bi-pencil"></i> Modifier
+            </button>
+           
+           <!-- code  de la confirmation de modifier -->
+           <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="modificationForm">
+                      <div class="mb-3">
+                        <label for="editCodeFace" class="form-label">Code Face</label>
+                        <input type="text" class="form-control" id="editCodeFace">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editZone" class="form-label">Zone</label>
+                        <input type="text" class="form-control" id="editZone">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editRegion" class="form-label">Region</label>
+                        <input type="text" class="form-control" id="editRegion">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editEmplacement" class="form-label">Emplacement</label>
+                        <input type="text" class="form-control" id="editEmplacement">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editRegie" class="form-label">Regie</label>
+                        <input type="text" class="form-control" id="editRegie">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editType" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="editType">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editFace" class="form-label">Face</label>
+                        <input type="text" class="form-control" id="editFace">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editEclairage" class="form-label">Eclairage</label>
+                        <input type="text" class="form-control" id="editEclairage">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editVisibilite" class="form-label">Visibilite</label>
+                        <input type="text" class="form-control" id="editVisibilite">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editMetrage" class="form-label">Métrage</label>
+                        <input type="text" class="form-control" id="editMetrage">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editPrix" class="form-label">Prix</label>
+                        <input type="text" class="form-control" id="editPrix">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editTraficRoutier" class="form-label">Trafic Routier</label>
+                        <input type="text" class="form-control" id="editTraficRoutier">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editPhoto" class="form-label">Photo</label>
+                        <input type="text" class="form-control" id="editPhoto">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editPositionX" class="form-label">Position X</label>
+                        <input type="text" class="form-control" id="PositionX">
+                      </div>
+                      <div class="mb-3">
+                        <label for="editPositionY" class="form-label">Position Y</label>
+                        <input type="text" class="form-control" id="PositionY">
+                      </div>
+                      <!-- Ajoutez d'autres champs de formulaire pour Date de création et Date de modification -->
+                     
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <!-- Vos autres éléments HTML -->
+            
+            <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
+            <script>
+              function openModifierModal() {
+                // Vérifier si la case à cocher est cochée
+                var checkboxChecked = $("#panneauxTable tbody input[type='checkbox']:checked").length > 0;
+            
+                if (checkboxChecked) {
+                  // Si la case est cochée, afficher la modale de modification
+                  $('#modifierModal').modal('show');
+                } else {
+                  // Si la case n'est pas cochée, afficher un message d'erreur
+                  alert("Veuillez cocher au moins une case avant de modifier.");
+                }
+              }
+            </script>
+            <!-- code  de la confirmation de suppression -->
+           
+           <!-- code  de la confirmation de suppression -->
+<button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
+<i class="bi bi-trash"></i> Supprimer
+</button>
+<!-- Fenêtre de confirmation de suppression -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
+  </div>
+</div>
+</div>
+</div>
+      
+         <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
+          
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main><!-- End #main -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function deleteAction() {
+  // Vérifier si au moins une case est cochée
+  var atLeastOneChecked = $("#panneauxTable tbody input[type='checkbox']:checked").length > 0;
+  
+  if (!atLeastOneChecked) {
+    // Si aucune case n'est cochée, afficher un message d'erreur
+    alert("Veuillez cocher au moins une case avant de supprimer.");
+  } else {
+    // Si au moins une case est cochée, afficher la fenêtre de confirmation
+    $('#confirmDeleteModal').modal('show');
+  }
+}
+
+// Fonction pour confirmer la suppression
+function confirmDelete() {
+  // Supprimer les lignes sélectionnées du tableau
+  $("#panneauxTable tbody input[type='checkbox']:checked").each(function() {
+    $(this).closest('tr').remove();
+  });
+  
+  // Masquer la fenêtre modale
+  $('#confirmDeleteModal').modal('hide');
+}
+</script>
+<bh></bh>
                 <thead>
                   <tr>
                     <th>    </th>
@@ -256,276 +514,7 @@
             
               </table>
 
-              <!-- End Table with stripped rows -->
-              <div class="text-center">
-               
-                    <!-- code  de la confirmation de Ajouter -->
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Ajouter">
-                      <i class="bi bi-plus"></i> Ajouter
-                    </button>
-                    
-                    <div class="modal fade" id="Ajouter" tabindex="-1">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                          </div>
-                          <div class="modal-body">
-                            <form>
-                              <div>
-                                <label for="code Face" class="form-label">Code Face:</label>
-                                <input type="text" id="code Face" class="form-control" name="code Face" required />
-                              </div>
-                              <div>
-                                <label for="zone" class="form-label">Zone:</label>
-                                <input type="text" id="zone" class="form-control" name="zone" required />
-                              </div>
-                              <div>
-                                <label for="région" class="form-label">Région:</label>
-                                <input type="text" id="région" class="form-control" name="région" required />
-                              </div>
-                              <div>
-                                <label for="emplacement" class="form-label">Emplacement:</label>
-                                <input type="text" id="emplacement" class="form-control" name="emplacement" required />
-                              </div>
-                              <div>
-                                <label for="régie" class="form-label">Régie:</label>
-                                <input type="text" id="régie" class="form-control" name="régie" required />
-                              </div>
-                              <div>
-                                <label for="type" class="form-label">Type:</label>
-                                <input type="text" id="type" class="form-control" name="type" required />
-                              </div>
-                              <div>
-                                <label for="face" class="form-label">Face:</label>
-                                <input type="text" id="face" class="form-control" name="face" required />
-                              </div>
-                              <div>
-                                <label for="eclairage" class="form-label">Eclairage:</label>
-                                <input type="text" id="eclairage" class="form-control" name="eclairage" required />
-                              </div>
-                              <div>
-                                <label for="visibilité" class="form-label">Visibilité:</label>
-                                <input type="text" id="visibilité" class="form-control" name="visibilité" required />
-                              </div>
-                              <div>
-                                <label for="métrage" class="form-label">Métrage:</label>
-                                <input type="text" id="métrage" class="form-control" name="métrage" required />
-                              </div>
-                              <div>
-                                <label for="prix" class="form-label">Prix:</label>
-                                <input type="text" id="prix" class="form-control" name="prix" required />
-                              </div>
-                              <div>
-                                <label for="trafic routier" class="form-label">Trafic Routier:</label>
-                                <input type="text" id="trafic routier" class="form-control" name="trafic routier" required />
-                              </div>
-                              <div>
-                                <label for="photo" class="form-label">Photo:</label>
-                                <input type="text" id="photo" class="form-control" name="photo" required />
-                              </div>
-                              <div>
-                                <label for="position x" class="form-label">Position X:</label>
-                                <input type="text" id="position x" class="form-control" name="position x" required />
-                              </div>
-                              <div>
-                                <label for="position y" class="form-label">Position Y:</label>
-                                <input type="text" id="position y" class="form-control" name="position y" required />
-                              </div>
-                              <div>
-                                <label for="creation" class="form-label">Date de Création:</label>
-                                <input type="date" id="creation" class="form-control" name="creation" required />
-                              </div>
-                              <div class="mb-3">
-                                <label for="modification" class="form-label">Date de Modification:</label>
-                                <input type="date" id="modification" class="form-control" name="modification" required />
-                              </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
-                          
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
-                 <!-- code  de la confirmation de modifier -->
-                 <button type="button" class="btn btn-warning" onclick="openModifierModal()">
-                  <i class="bi bi-pencil"></i> Modifier
-                </button>
-               
-               <!-- code  de la confirmation de modifier -->
-               <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form id="modificationForm">
-                          <div class="mb-3">
-                            <label for="editCodeFace" class="form-label">Code Face</label>
-                            <input type="text" class="form-control" id="editCodeFace">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editZone" class="form-label">Zone</label>
-                            <input type="text" class="form-control" id="editZone">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editRegion" class="form-label">Region</label>
-                            <input type="text" class="form-control" id="editRegion">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editEmplacement" class="form-label">Emplacement</label>
-                            <input type="text" class="form-control" id="editEmplacement">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editRegie" class="form-label">Regie</label>
-                            <input type="text" class="form-control" id="editRegie">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editType" class="form-label">Type</label>
-                            <input type="text" class="form-control" id="editType">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editFace" class="form-label">Face</label>
-                            <input type="text" class="form-control" id="editFace">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editEclairage" class="form-label">Eclairage</label>
-                            <input type="text" class="form-control" id="editEclairage">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editVisibilite" class="form-label">Visibilite</label>
-                            <input type="text" class="form-control" id="editVisibilite">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editMetrage" class="form-label">Métrage</label>
-                            <input type="text" class="form-control" id="editMetrage">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editPrix" class="form-label">Prix</label>
-                            <input type="text" class="form-control" id="editPrix">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editTraficRoutier" class="form-label">Trafic Routier</label>
-                            <input type="text" class="form-control" id="editTraficRoutier">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editPhoto" class="form-label">Photo</label>
-                            <input type="text" class="form-control" id="editPhoto">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editPositionX" class="form-label">Position X</label>
-                            <input type="text" class="form-control" id="PositionX">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editPositionY" class="form-label">Position Y</label>
-                            <input type="text" class="form-control" id="PositionY">
-                          </div>
-                          <!-- Ajoutez d'autres champs de formulaire pour Date de création et Date de modification -->
-                          <div class="mb-3">
-                            <label for="editDateCreation" class="form-label">Date de création</label>
-                            <input type="text" class="form-control" id="editDateCreation" disabled>
-                          </div>
-                          <div class="mb-3">
-                            <label for="editDateModification" class="form-label">Date de modification</label>
-                            <input type="text" class="form-control" id="editDateModification" disabled>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                
-                <!-- Vos autres éléments HTML -->
-                
-                <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
-                <script>
-                  function openModifierModal() {
-                    // Vérifier si la case à cocher est cochée
-                    var checkboxChecked = $("#panneauxTable tbody input[type='checkbox']:checked").length > 0;
-                
-                    if (checkboxChecked) {
-                      // Si la case est cochée, afficher la modale de modification
-                      $('#modifierModal').modal('show');
-                    } else {
-                      // Si la case n'est pas cochée, afficher un message d'erreur
-                      alert("Veuillez cocher au moins une case avant de modifier.");
-                    }
-                  }
-                </script>
-                <!-- code  de la confirmation de suppression -->
-               
-               <!-- code  de la confirmation de suppression -->
-<button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
-  <i class="bi bi-trash"></i> Supprimer
-</button>
-<!-- Fenêtre de confirmation de suppression -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
-          
-             <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
-              
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-    function deleteAction() {
-      // Vérifier si au moins une case est cochée
-      var atLeastOneChecked = $("#panneauxTable tbody input[type='checkbox']:checked").length > 0;
-      
-      if (!atLeastOneChecked) {
-        // Si aucune case n'est cochée, afficher un message d'erreur
-        alert("Veuillez cocher au moins une case avant de supprimer.");
-      } else {
-        // Si au moins une case est cochée, afficher la fenêtre de confirmation
-        $('#confirmDeleteModal').modal('show');
-      }
-    }
-  
-    // Fonction pour confirmer la suppression
-    function confirmDelete() {
-      // Supprimer les lignes sélectionnées du tableau
-      $("#panneauxTable tbody input[type='checkbox']:checked").each(function() {
-        $(this).closest('tr').remove();
-      });
-      
-      // Masquer la fenêtre modale
-      $('#confirmDeleteModal').modal('hide');
-    }
-  </script>
 
 
    <!-- ======= Footer ======= -->
@@ -561,7 +550,7 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  
 
 </body>
 <script>
@@ -599,9 +588,9 @@
                   <td>${panneau.metrage}</td>
                   <td>${panneau.prix}</td>
                   <td>${panneau.trafic_routier}</td>
-                  <td>${panneau.photo}</td>
+                  <td><img src="${panneau.photo}" style="max-width: 100px; max-height: 100px;"></td>
                   <td>${panneau.position_x}</td>
-                  <td>${panneau.position_Y}</td>
+                  <td>${panneau.position_y}</td>
                   <td>${panneau.cree_a}</td>
                   <td>${panneau.mis_a_jour_a}</td>
               `;
@@ -614,4 +603,37 @@
 
   populateTable(); // nedi el function  populateTable() awel ma tet7al el page automatique
   </script>
+
+
+<!-- fonction ajouter -->
+<script>
+document.getElementById('submitButton').addEventListener('click', async function(event) {
+  event.preventDefault(); // Prevent the default button behavior
+
+  const formData = new FormData(document.getElementById('ajouterForm')); // Create a FormData object from the form
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ': ' + pair[1]);
+  }
+  try {
+    const response = await fetch('http://localhost:3001/panneaux/', {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Panneau added successfully:', data);
+      window.location.href = 'Gestion-des-panneaux.html';
+    } else {
+      console.error('Failed to add panneau:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error adding panneau:', error);
+  }
+});
+  
+  
+  </script>
+  
+
 </html>
