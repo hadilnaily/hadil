@@ -260,10 +260,6 @@
                             <input type="date" id="date_retrait" class="form-control" name="date_retrait" required />
                           </div>
                           <div class="mb-3">
-                            <label for="photo" class="form-label">Photo:</label>
-                            <input type="text" id="photo" class="form-control" name="photo" required />
-                          </div>
-                          <div class="mb-3">
                             <label for="media-vusiel" class="form-label">Média Vusiel:</label>
                             <input type="text" id="media_vusiel" class="form-control" name="media_vusiel" required />
                           </div>
@@ -299,58 +295,73 @@
                         <form id="modificationForm">
                           <div class="mb-3">
                             <label for="editNomAnnanceur" class="form-label">Nom Annanceur</label>
-                            <input type="text" class="form-control" id="editNomAnnanceur">
+                            <input type="text" class="form-control" id="nom_annanceur_input" >
                           </div>
                           <div class="mb-3">
                             <label for="editTypePublication" class="form-label">Type Publication</label>
-                            <input type="text" class="form-control" id="editTypePublication">
+                            <input type="text" class="form-control" id="type_publication_input">
                           </div>
                           <div class="mb-3">
                             <label for="editDatePublication" class="form-label">Date Publication</label>
-                            <input type="text" class="form-control" id="editDatePublication">
+                            <input type="text" class="form-control" id="date_publication_input" >
                           </div>
                           <div class="mb-3">
                             <label for="editDateRetrait" class="form-label">Date Retrait</label>
-                            <input type="text" class="form-control" id="editDateRetrait">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editPhoto" class="form-label">Photo</label>
-                            <input type="text" class="form-control" id="editPhoto">
+                            <input type="text" class="form-control" id="date_retrait_input" >
                           </div>
                           <div class="mb-3">
                             <label for="editMediaVusiel" class="form-label">Média Vusiel</label>
-                            <input type="text" class="form-control" id="editMediaVusiel">
+                            <input type="text" class="form-control" id="media_vusiel_input" >
                           </div>
                           <!-- Ajoutez d'autres champs de formulaire pour Date de création et Date de modification -->
                           
                         </form>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
+                        <button type="button" class="btn btn-success" onclick="confirmModification()"><i class="bi bi-check-circle"></i> Confirmer</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
                       </div>
                     </div>
                   </div>
                 </div>
-                
-                
-                <!-- Vos autres éléments HTML -->
-                
                 <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
                 <script>
                   function openModifierModal() {
-                    // Vérifier si la case à cocher est cochée
-                    var checkboxChecked = $("#compagnesTable tbody input[type='checkbox']:checked").length > 0;
-                
+                    var checkboxChecked = $("#compagnesTable tbody input[name='compagnes']:checked").length > 0;
+                  
                     if (checkboxChecked) {
-                      // Si la case est cochée, afficher la modale de modification
+                      var selectedRow = $("#compagnesTable tbody input[name='compagnes']:checked").closest('tr');
+                      var nomAnnanceur = selectedRow.find('td:eq(1)').text().trim();
+                      var typePublication = selectedRow.find('td:eq(2)').text().trim();
+                      var datePublication = selectedRow.find('td:eq(3)').text().trim();
+                      var dateRetrait = selectedRow.find('td:eq(4)').text().trim();
+                      var mediaVusiel = selectedRow.find('td:eq(5)').text().trim();
+                      
+                      // Affecter les valeurs aux champs du formulaire
+                      $('#nom_annanceur_input').val(nomAnnanceur);
+                      $('#type_publication_input').val(typePublication);
+                      $('#date_publication_input').val(datePublication);
+                      $('#date_retrait_input').val(dateRetrait);
+                      $('#media_vusiel_input').val(mediaVusiel);
+                  
                       $('#modifierModal').modal('show');
                     } else {
-                      // Si la case n'est pas cochée, afficher un message d'erreur
                       alert("Veuillez cocher au moins une case avant de modifier.");
                     }
                   }
-                </script>
+                  
+                  function confirmModification() {
+                    // Récupérer les valeurs des champs
+                    var nomAnnanceur = $('#nom_annanceur_input').val();
+                    var typePublication = $('#type_publication_input').val();
+                    var datePublication = $('#date_publication_input').val();
+                    var dateRetrait = $('#date_retrait_input').val();
+                    var mediaVusiel = $('#media_vusiel_input').val();
+                    $('#modifierModal').modal('hide');
+                  }
+                  </script>
+                  
+                  
   
                 
                  <!-- code  de la confirmation de suppression -->
@@ -387,29 +398,49 @@
   </main><!-- End #main -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-    function deleteAction() {
-      // Vérifier si au moins une case est cochée
-      var atLeastOneChecked = $("#compagnesTable tbody input[type='checkbox']:checked").length > 0;
-      
-      if (!atLeastOneChecked) {
-        // Si aucune case n'est cochée, afficher un message d'erreur
-        alert("Veuillez cocher au moins une case avant de supprimer.");
-      } else {
-        // Si au moins une case est cochée, afficher la fenêtre de confirmation
-        $('#confirmDeleteModal').modal('show');
-      }
-    }
+     var deletedIDCompagne; // Global variable to store the selected ID
+function deleteAction() {
+  // Vérifier si au moins une case est cochée
+  var atLeastOneChecked = $("#compagnesTable tbody input[name='compagnes']:checked").length > 0;
+  
+  if (atLeastOneChecked) {
+    $("#compagnesTable tbody input[name='compagnes']:checked").each(function() {
+    deletedIDCompagne= $(this).val();
+
+});
+    // Si au moins une case est cochée, afficher la fenêtre de confirmation
+    $('#confirmDeleteModal').modal('show');
+
+  } else {
+    alert("Veuillez cocher au moins une case avant de supprimer.");
+
+  }
+}
   
     // Fonction pour confirmer la suppression
     function confirmDelete() {
-      // Supprimer les lignes sélectionnées du tableau
-      $("#compagnesTable tbody input[type='checkbox']:checked").each(function() {
-        $(this).closest('tr').remove();
-      });
-      
-      // Masquer la fenêtre modale
+  console.log(deletedIDCompagne);
+
+  // Send an AJAX request to delete the item by ID
+  $.ajax({
+    url: 'http://localhost:3001/compagnes/' + deletedIDCompagne, // Replace with your server-side delete URL
+    type: 'DELETE', // Use DELETE method
+    success: function(response) {
+      // Handle success
+      console.log("Deletion successful", response);
+
+      // Remove the corresponding row from the table
+      $("#compagnesTable tbody input[name='compagnes']:checked").closest('tr').remove();
+
+      // Hide the modal
       $('#confirmDeleteModal').modal('hide');
+    },
+    error: function(error) {
+      // Handle error
+      console.log("Deletion failed", error);
     }
+  });
+}
   </script>
 
   <br>
@@ -420,7 +451,6 @@
                   <th>Type Publication</th>
                   <th data-type="date" data-format="YYYY/DD/MM">Date Publication</th>
                   <th data-type="date" data-format="YYYY/DD/MM">Date Retrait</th>
-                  <th>Photo</th>
                   <th>Média Vusiel</th>
                   <th data-type="date" data-format="YYYY/DD/MM">Date De Création</th>
                   <th data-type="date" data-format="YYYY/DD/MM"> Date De Modification</th>
@@ -490,12 +520,11 @@
           data.forEach(function (compagne) {
               var row = document.createElement('tr');
               row.innerHTML = `
-                  <td><input type="checkbox"</td>
+              <td><input type="radio" name="compagnes" value="${compagne._id}"></td>
                   <td>${compagne.nom_annanceur}</td>
                   <td>${compagne.type_publication}</td>
                   <td>${compagne.date_publication}</td>
                   <td>${compagne.date_retrait}</td>
-                  <td><img src="${compagne.photo}" style="max-width: 100px; max-height: 100px;"></td>
                   <td>${compagne.media_vusiel}</td>
                   <td>${compagne.cree_a}</td>
                   <td>${compagne.mis_a_jour_a}</td>

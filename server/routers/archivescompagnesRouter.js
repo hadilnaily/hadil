@@ -16,7 +16,7 @@ router.get("/", async (req, res)=>{
 //POST ajouter compagnes
 router.post('/', async (req, res) => { // Utilisez app.post() au lieu de router.post()  
     let archivescompagne = new CompagneModel({
-        photo: req.body.photo,
+       
         nom_annanceur: req.body.nom_annanceur,
         media_vusiel: req.body.media_vusiel,
         date_publication: req.body.date_publication,
@@ -51,7 +51,7 @@ router.put('/:id', async (req, res) => {
 // DELETE supprimer archivescompagnes
 router.delete('/:id', async (req, res) => {
     try {
-        let archivescompagnes = await archivescompagneModel.findByIdAndDelete(req.params.id);
+        let archivescompagnes = await ArchivescompagneModel.findByIdAndDelete(req.params.id);
         if (!archivescompagnes) {
             return res.status(404).send('No archivescompagnes with the given ID was found!');
         }

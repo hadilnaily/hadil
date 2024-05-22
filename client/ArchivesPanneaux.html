@@ -92,82 +92,196 @@
                 </div>
                 &nbsp;&nbsp;
   
-                <!-- code  de la confirmation de modifier -->
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Modifier">
-                  <i class="bi bi-pencil"></i> Modifier
-                </button>
-                <div class="modal fade" id="Modifier" tabindex="-1">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form>
-                          <div class="mb-3">
-                            <label for="editPhoto" class="form-label">Photo</label>
-                            <input type="image" class="form-control" id="editPhoto">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editRegion" class="form-label">Region</label>
-                            <input type="text" class="form-control" id="editRegion">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editCodeface" class="form-label">Code face</label>
-                            <input type="text" class="form-control" id="editCodeface">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editEmplacement" class="form-label">Emplacement</label>
-                            <input type="text" class="form-control" id="editEmplacement">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editType" class="form-label">Type</label>
-                            <input type="text" class="form-control" id="editType">
-                          </div>
-                          <div class="mb-3">
-                            <label for="editTraficRoutier" class="form-label">Trafic Routier</label>
-                            <input type="text" class="form-control" id="editTraficRoutier">
-                          </div>
-                          
-                          <div class="mb-3">
-                            <label for="editPrix" class="form-label">Prix</label>
-                            <input type="text" class="form-control" id="editPrix" >
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                       <button type="button" class="btn btn-success"><i class="bi bi-check-circle"> </i>Confirmer</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Annuler</button>
-                        
-                      </div>
-                    </div>
+                <!-- Bouton pour ouvrir la fenêtre modale -->
+<button type="button" class="btn btn-warning" onclick="openModifierModal()">
+  <i class="bi bi-pencil"></i> Modifier
+</button>
+
+<!-- Fenêtre modale -->
+<div class="modal fade" id="Modifier" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="mb-3">
+                      <label for="code_face_input" class="form-label">Code Face</label>
+                      <input type="text" class="form-control" id="code_face_input">
                   </div>
-                </div>
+                  <div class="mb-3">
+                      <label for="region_input" class="form-label">Region</label>
+                      <input type="text" class="form-control" id="region_input">
+                  </div>
+                  <div class="mb-3">
+                      <label for="emplacement_input" class="form-label">Emplacement</label>
+                      <input type="text" class="form-control" id="emplacement_input">
+                  </div>
+                  <div class="mb-3">
+                      <label for="type_input" class="form-label">Type</label>
+                      <input type="text" class="form-control" id="type_input">
+                  </div>
+                  <div class="mb-3">
+                      <label for="prix_input" class="form-label">Prix</label>
+                      <input type="text" class="form-control" id="prix_input">
+                  </div>
+                  <div class="mb-3">
+                      <label for="trafic_routier_input" class="form-label">Trafic Routier</label>
+                      <input type="text" class="form-control" id="trafic_routier_input">
+                  </div>
+                  <div class="mb-3">
+                      <label for="photo_input" class="form-label">Photo</label>
+                      <input type="text" class="form-control" id="photo_input">
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-success" onclick="confirmModification()">
+                  <i class="bi bi-check-circle"></i> Confirmer
+              </button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                  <i class="bi bi-x"></i> Annuler
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+function openModifierModal() {
+  // Vérifiez si une case à cocher est cochée
+  var checkboxChecked = $("#archivespanneauxTable tbody input[name='archivespanneaux']:checked").length > 0;
+
+  if (checkboxChecked) {
+      // Récupérez les valeurs des champs du formulaire à partir de la ligne sélectionnée
+      var selectedRow = $("#archivespanneauxTable tbody input[name='archivespanneaux']:checked").closest('tr');
+      var codeFace = selectedRow.find('td:eq(1)').text().trim();
+      var region = selectedRow.find('td:eq(2)').text().trim();
+      var emplacement = selectedRow.find('td:eq(3)').text().trim();
+      var type = selectedRow.find('td:eq(4)').text().trim();
+      var prix = selectedRow.find('td:eq(5)').text().trim();
+      var traficRoutier = selectedRow.find('td:eq(6)').text().trim();
+      var photo = selectedRow.find('td:eq(7) img').attr('src').trim();
+
+      // Pré-remplissez les champs du formulaire dans la fenêtre modale de modification
+      $('#code_face_input').val(codeFace);
+      $('#region_input').val(region);
+      $('#emplacement_input').val(emplacement);
+      $('#type_input').val(type);
+      $('#prix_input').val(prix);
+      $('#trafic_routier_input').val(traficRoutier);
+      $('#photo_input').val(photo);
+
+      // Affichez la fenêtre modale de modification
+      $('#Modifier').modal('show');
+  } else {
+      // Si aucune case n'est cochée, affichez un message d'erreur
+      alert("Veuillez cocher au moins une case avant de modifier.");
+  }
+}
+
+function confirmModification() {
+  // Récupérer les valeurs des champs
+  var codeFace = $('#code_face_input').val();
+  var region = $('#region_input').val();
+  var emplacement = $('#emplacement_input').val();
+  var type = $('#type_input').val();
+  var prix = $('#prix_input').val();
+  var traficRoutier = $('#trafic_routier_input').val();
+  var photo = $('#photo_input').val();
+
+  // Faire quelque chose avec les valeurs récupérées
+
+  // Fermer la modale
+  $('#Modifier').modal('hide');
+}
+</script>
+
+                
                 &nbsp;&nbsp;
   
-  
-                 <!-- code  de la confirmation de suppression -->
-                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Supprimer">
-                  <i class="bi bi-trash"></i>Supprimer
-                </button>
-                <div class="modal fade" id="Supprimer" tabindex="-1">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                      </div>
-                      <div class="modal-body">
-                        Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i>Supprimer</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>  
+            <!-- code  de la confirmation de suppression -->
+<button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
+  <i class="bi bi-trash"></i> Supprimer
+  </button>
+  <!-- Fenêtre de confirmation de suppression -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+      <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
+    </div>
+  </div>
+  </div>
+  </div>
+        
            <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
+            
+  
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+</section> 
+           <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+           <script>
+            var deletedIDArchivespanneau; // Global variable to store the selected ID
+            
+            function deleteAction() {
+              // Check if at least one checkbox is checked
+              var checkedItems = $("#archivespanneauxTable tbody input[name='archivespanneaux']:checked");
+            
+              if (checkedItems.length > 0) {
+                // Store the ID of the checked item
+                deletedIDArchivespanneau = checkedItems.val();
+                
+                // Show the delete confirmation modal
+                $('#confirmDeleteModal').modal('show');
+              } else {
+                alert("Veuillez cocher au moins une case avant de supprimer.");
+              }
+            }
+            
+            // Function to confirm deletion
+            function confirmDelete() {
+              if (!deletedIDArchivespanneau) {
+                alert("Aucune ID sélectionnée pour la suppression.");
+                return;
+              }
+            
+              // Send an AJAX request to delete the item by ID
+              $.ajax({
+                url: 'http://localhost:3001/archivespanneaux/' + deletedIDArchivespanneau,
+                type: 'DELETE',
+                success: function(response) {
+                  // Handle success
+                  console.log("Deletion successful", response);
+            
+                  // Remove the corresponding row from the table
+                  $("#archivespanneauxTable tbody input[name='archivespanneaux']:checked").closest('tr').remove();
+            
+                  // Hide the modal
+                  $('#confirmDeleteModal').modal('hide');
+                },
+                error: function(error) {
+                  // Handle error
+                  console.log("Deletion failed", error);
+                }
+              });
+            }
+            </script>
 
            <br> <br>
                 <thead>
@@ -242,7 +356,7 @@
           data.forEach(function (archivespanneau) {
               var row = document.createElement('tr');
               row.innerHTML = `
-                  <td><input type="checkbox"</td>
+              <td><input type="radio" name="archivespanneaux" value="${archivespanneau._id}"></td>
                   <td><a href="#" class="text-primary fw-bold">${archivespanneau.code_face}</a></td>
                   <td>${archivespanneau.region}</td>
                   <td>${archivespanneau.emplacement}</td>

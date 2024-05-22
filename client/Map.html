@@ -282,30 +282,28 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA19WKLIDbUV2fCilZ3Gpf6V3OwvVyhVUA&callback=initMap" ></script>
 
 
-<script>
-  async function fetchData() {
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+  <script>
+    async function fetchData() {
       try {
-          const response = await fetch('http://localhost:3001/panneaux/');
-          const data = await response.json();
-          return data;
+        const response = await fetch('http://localhost:3001/panneaux/');
+        const data = await response.json();
+        return data;
       } catch (error) {
-          console.error('Error fetching data:', error);
-          throw error; // Rethrow the error to be caught by the caller
+        console.error('Error fetching data:', error);
+        throw error;
       }
-  }
+    }
 
-
-
-
-  async function initMap() {
-    try {
+    async function initMap() {
+      try {
         const data = await fetchData();
         console.log(data);
 
-        const mapContainer = document.getElementsByClassName('mapss')[0]; // Select the first element with class 'mapss'
+        const mapContainer = document.getElementsByClassName('mapss')[0];
         const map = new google.maps.Map(mapContainer, {
-            center: { lat: 34.41, lng: 9.47 },
-            zoom: 7
+          center: { lat: 34.41, lng: 9.47 },
+          zoom: 7
         });
 
         const infowindow = new google.maps.InfoWindow();
@@ -315,83 +313,79 @@
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
         data.forEach((element) => {
-            console.log(element.position_x + element.position_Y + "");
-            let a;
-            switch (element.type) {
-                case "STATIQUE":
-                    a ="STATIQUE.png";
-                    break;
-                case "PALISSADE":
-                    a ="PALISSADE.png";
-                    break;
-                case "UNIPOLE":
-                    a ="UNIPOLE.png";
-                    break;
-                case "MUR":
-                    a ="MUR.png.PNG";
-                    break;
-                case "SUCETTE ABRIBUS":
-                    a ="SUCETTE ABRIBUS.png";
-                    break;
-                default:
-                    a ="http://maps.google.com/mapfiles/ms/icons/red.png";
-            }
+          console.log(element.position_x + element.position_Y + "");
+          let a;
+          switch (element.type) {
+            case "STATIQUE":
+              a = "STATIQUE.png";
+              break;
+            case "PALISSADE":
+              a = "PALISSADE.png";
+              break;
+            case "UNIPOLE":
+              a = "UNIPOLE.png";
+              break;
+            case "MUR":
+              a = "MUR.png";
+              break;
+            case "SUCETTE ABRIBUS":
+              a = "SUCETTE ABRIBUS.png";
+              break;
+            default:
+              a = "http://maps.google.com/mapfiles/ms/icons/red.png";
+          }
+          console.log("Icon path:", a);
 
-            const marker = new google.maps.Marker({
-                position: new google.maps.LatLng(element.position_x, element.position_Y),
-                map: map,
-                icon: a, // Make sure the path to marker.png is correct
-            });
+          const marker = new google.maps.Marker({
+            position: new google.maps.LatLng(element.position_x, element.position_Y),
+            map: map,
+            icon: a,
+          });
 
-            google.maps.event.addListener(marker, "click", () => {
-                infowindow.setContent(
-                    "<b>" +
-                    element.regie +
-                    '- <font color ="red"> ' +
-                    element.code_face + '</font><font color ="blue"> ' +
-                    element.traffic + " /element.type</font>"
-                );
-                infowindow.open(map, marker);
-            });
+          google.maps.event.addListener(marker, "click", () => {
+            infowindow.setContent(
+              "<b>" +
+              element.regie +
+              '- <font color ="red"> ' +
+              element.code_face + '</font><font color ="blue"> ' +
+                element.type + "</font>"
+            );
+            infowindow.open(map, marker);
+          });
         });
-    } catch (error) {
+      } catch (error) {
         console.error('Error initializing map:', error);
+      }
     }
-}
 
+    window.onload = function() {
+      var elements = document.getElementsByClassName("mapss");
+      for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        element.removeAttribute("style");
+      }
+    };
 
-  window.onload = function() {
-// Get all elements with the class name
-var elements = document.getElementsByClassName("mapss");
-
-// Loop through each element and remove the attribute
-for (var i = 0; i < elements.length; i++) {
-    var element = elements[i];
-    element.removeAttribute("style");
-}
-
-    
-};
-setTimeout(() => {
-  var elements = document.getElementsByClassName("mapss");
-// Loop through each element and remove the attribute
-for (var i = 0; i < elements.length; i++) {
-    var element = elements[i];
-    element.removeAttribute("style");
-}
-}, 3000);
-</script>
-
-
-<div id="legend">
-  <h3>Légende des Panneaux</h3>
-  <div><img src="STATIQUE.png" alt="Statique"> Statique</div>
-  <div><img src="PALISSADE.png" alt="Palissade"> Palissade</div>
-  <div><img src="UNIPOLE.png" alt="Unipole"> Unipole</div>
-  <div><img src="MUR.png" alt="Mur"> Mur</div>
-  <div><img src="SUCETTE ABRIBUS.png" alt="Sucette Abribus"> Sucette Abribus</div>
-  <div><img src="http://maps.google.com/mapfiles/ms/icons/red.png" alt="Autres"> Autres</div>
-</div>
+    setTimeout(() => {
+      var elements = document.getElementsByClassName("mapss");
+      for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        element.removeAttribute("style");
+      }
+    }, 3000);
+  </script>
+</head>
+<body onload="initMap()">
+  <div class="mapss" style="width: 100%; height: 500px;"></div>
+  <div id="legend">
+    <h3>Légende des Panneaux</h3>
+    <div><img src="STATIQUE.png" alt="Statique"> Statique</div>
+    <div><img src="PALISSADE.png" alt="Palissade"> Palissade</div>
+    <div><img src="UNIPOLE.png" alt="Unipole"> Unipole</div>
+    <div><img src="MUR.png" alt="Mur"> Mur</div>
+    <div><img src="SUCETTE ABRIBUS.png" alt="Sucette Abribus"> Sucette Abribus</div>
+    <div><img src="http://maps.google.com/mapfiles/ms/icons/red.png" alt="Autres"> Autres</div>
+  </div>
 </body>
 </html>
 

@@ -16,9 +16,6 @@ const CompagneSchema = new mongoose.Schema({
     date_retrait:{
         type: String,
     },
-    photo:{
-        type: String,
-    },
     cree_a: {
         type:String,
     },

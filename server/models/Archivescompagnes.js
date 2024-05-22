@@ -1,9 +1,7 @@
 const mongoose = require ("mongoose");
 
 const ArchivescompagneSchema = new mongoose.Schema({
-    photo:{
-        type: String,
-    },
+    
     nom_annanceur:{
         type: String,
     },  

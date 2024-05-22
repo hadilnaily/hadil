@@ -336,70 +336,70 @@
                   <form id="modificationForm">
                       <div class="mb-3">
                         <label for="editCodeFace" class="form-label">Code Face</label>
-                        <input type="text" class="form-control" id="editCodeFace">
+                        <input type="text" class="form-control" id="code_face_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editZone" class="form-label">Zone</label>
-                        <input type="text" class="form-control" id="editZone">
+                        <input type="text" class="form-control" id="zone_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editRegion" class="form-label">Region</label>
-                        <input type="text" class="form-control" id="editRegion">
+                        <input type="text" class="form-control" id="region_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editEmplacement" class="form-label">Emplacement</label>
-                        <input type="text" class="form-control" id="editEmplacement">
+                        <input type="text" class="form-control" id="emplacement_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editRegie" class="form-label">Regie</label>
-                        <input type="text" class="form-control" id="editRegie">
+                        <input type="text" class="form-control" id="regie_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editType" class="form-label">Type</label>
-                        <input type="text" class="form-control" id="editType">
+                        <input type="text" class="form-control" id="type_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editFace" class="form-label">Face</label>
-                        <input type="text" class="form-control" id="editFace">
+                        <input type="text" class="form-control" id="face_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editEclairage" class="form-label">Eclairage</label>
-                        <input type="text" class="form-control" id="editEclairage">
+                        <input type="text" class="form-control" id="eclairage_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editVisibilite" class="form-label">Visibilite</label>
-                        <input type="text" class="form-control" id="editVisibilite">
+                        <input type="text" class="form-control" id="visibilite_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editMetrage" class="form-label">Métrage</label>
-                        <input type="text" class="form-control" id="editMetrage">
+                        <input type="text" class="form-control" id="metrage_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editPrix" class="form-label">Prix</label>
-                        <input type="text" class="form-control" id="editPrix">
+                        <input type="text" class="form-control" id="prix_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editTraficRoutier" class="form-label">Trafic Routier</label>
-                        <input type="text" class="form-control" id="editTraficRoutier">
+                        <input type="text" class="form-control" id="trafic_routier_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editPhoto" class="form-label">Photo</label>
-                        <input type="text" class="form-control" id="editPhoto">
+                        <input type="text" class="form-control" id="photo_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editPositionX" class="form-label">Position X</label>
-                        <input type="text" class="form-control" id="PositionX">
+                        <input type="text" class="form-control" id="position_x_input" >
                       </div>
                       <div class="mb-3">
                         <label for="editPositionY" class="form-label">Position Y</label>
-                        <input type="text" class="form-control" id="PositionY">
+                        <input type="text" class="form-control" id="position_y_input" >
                       </div>
                       <!-- Ajoutez d'autres champs de formulaire pour Date de création et Date de modification -->
                      
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
+                    <button type="button" class="btn btn-success" onclick="confirmModification()"><i class="bi bi-check-circle"></i> Confirmer</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
                   </div>
                 </div>
@@ -412,21 +412,77 @@
             <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
             <script>
               function openModifierModal() {
-                // Vérifier si la case à cocher est cochée
-                var checkboxChecked = $("#panneauxTable tbody input[type='checkbox']:checked").length > 0;
-            
-                if (checkboxChecked) {
-                  // Si la case est cochée, afficher la modale de modification
-                  $('#modifierModal').modal('show');
-                } else {
-                  // Si la case n'est pas cochée, afficher un message d'erreur
-                  alert("Veuillez cocher au moins une case avant de modifier.");
-                }
+                  // Vérifiez si une case à cocher est cochée
+                  var checkboxChecked = $("#panneauxTable tbody input[name='panneaux']:checked").length > 0;
+              
+                  if (checkboxChecked) {
+                      // Récupérez les valeurs des champs du formulaire à partir de la ligne sélectionnée
+                      var selectedRow = $("#panneauxTable tbody input[name='panneaux']:checked").closest('tr');
+                      var codeFace = selectedRow.find('td:eq(1)').text().trim();
+                      var zone = selectedRow.find('td:eq(2)').text().trim();
+                      var region = selectedRow.find('td:eq(3)').text().trim();
+                      var emplacement = selectedRow.find('td:eq(4)').text().trim();
+                      var regie = selectedRow.find('td:eq(5)').text().trim();
+                      var type = selectedRow.find('td:eq(6)').text().trim();
+                      var face = selectedRow.find('td:eq(7)').text().trim();
+                      var eclairage = selectedRow.find('td:eq(8)').text().trim();
+                      var visibilite = selectedRow.find('td:eq(9) img').attr('src').trim(); // Correction
+                      var metrage = selectedRow.find('td:eq(10)').text().trim();
+                      var prix = selectedRow.find('td:eq(11)').text().trim();
+                      var traficRoutier = selectedRow.find('td:eq(12)').text().trim();
+                      var photo = selectedRow.find('td:eq(13) img').attr('src'); // Correction
+                      var positionX = selectedRow.find('td:eq(14)').text().trim();
+                      var positionY = selectedRow.find('td:eq(15)').text().trim();
+              
+                      // Pré-remplissez les champs du formulaire dans la fenêtre modale de modification
+                      $('#code_face_input').val(codeFace);
+                      $('#zone_input').val(zone);
+                      $('#region_input').val(region);
+                      $('#emplacement_input').val(emplacement);
+                      $('#regie_input').val(regie);
+                      $('#type_input').val(type);
+                      $('#face_input').val(face);
+                      $('#eclairage_input').val(eclairage);
+                      $('#visibilite_input').val(visibilite);
+                      $('#metrage_input').val(metrage);
+                      $('#prix_input').val(prix);
+                      $('#trafic_routier_input').val(traficRoutier);
+                      $('#photo_input').val(photo);
+                      $('#position_x_input').val(positionX);
+                      $('#position_y_input').val(positionY);
+              
+                      // Affichez la fenêtre modale de modification
+                      $('#modifierModal').modal('show');
+                  } else {
+                      // Si aucune case n'est cochée, affichez un message d'erreur
+                      alert("Veuillez cocher au moins une case avant de modifier.");
+                  }
               }
-            </script>
-            <!-- code  de la confirmation de suppression -->
-           
-           <!-- code  de la confirmation de suppression -->
+              
+              function confirmModification() {
+                  // Récupérer les valeurs des champs
+                  var codeFace = $('#code_face_input').val();
+                  var zone = $('#zone_input').val();
+                  var region = $('#region_input').val();
+                  var emplacement = $('#emplacement_input').val();
+                  var regie = $('#regie_input').val();
+                  var type = $('#type_input').val();
+                  var face = $('#face_input').val();
+                  var eclairage = $('#eclairage_input').val();
+                  var visibilite = $('#visibilite_input').val();
+                  var metrage = $('#metrage_input').val();
+                  var prix = $('#prix_input').val();
+                  var traficRoutier = $('#trafic_routier_input').val();
+                  var photo = $('#photo_input').val();
+                  var positionX = $('#position_x_input').val();
+                  var positionY = $('#position_y_input').val();
+                  $('#modifierModal').modal('hide');
+              }
+              </script>
+              
+              
+              
+            <!-- code  de la confirmation de suppression --> <!-- code  de la confirmation de suppression -->
 <button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
 <i class="bi bi-trash"></i> Supprimer
 </button>
@@ -463,28 +519,48 @@
 </main><!-- End #main -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+  var deletedIDPanneau; // Global variable to store the selected ID
 function deleteAction() {
   // Vérifier si au moins une case est cochée
-  var atLeastOneChecked = $("#panneauxTable tbody input[type='checkbox']:checked").length > 0;
+  var atLeastOneChecked = $("#panneauxTable tbody input[name='panneaux']:checked").length > 0;
   
-  if (!atLeastOneChecked) {
-    // Si aucune case n'est cochée, afficher un message d'erreur
-    alert("Veuillez cocher au moins une case avant de supprimer.");
-  } else {
+  if (atLeastOneChecked) {
+    $("#panneauxTable tbody input[name='panneaux']:checked").each(function() {
+    deletedIDPanneau= $(this).val();
+
+});
     // Si au moins une case est cochée, afficher la fenêtre de confirmation
     $('#confirmDeleteModal').modal('show');
+
+  } else {
+    alert("Veuillez cocher au moins une case avant de supprimer.");
+
   }
 }
 
 // Fonction pour confirmer la suppression
 function confirmDelete() {
-  // Supprimer les lignes sélectionnées du tableau
-  $("#panneauxTable tbody input[type='checkbox']:checked").each(function() {
-    $(this).closest('tr').remove();
+  console.log(deletedIDPanneau);
+
+  // Send an AJAX request to delete the item by ID
+  $.ajax({
+    url: 'http://localhost:3001/panneaux/' + deletedIDPanneau, // Replace with your server-side delete URL
+    type: 'DELETE', // Use DELETE method
+    success: function(response) {
+      // Handle success
+      console.log("Deletion successful", response);
+
+      // Remove the corresponding row from the table
+      $("#panneauxTable tbody input[name='panneaux']:checked").closest('tr').remove();
+
+      // Hide the modal
+      $('#confirmDeleteModal').modal('hide');
+    },
+    error: function(error) {
+      // Handle error
+      console.log("Deletion failed", error);
+    }
   });
-  
-  // Masquer la fenêtre modale
-  $('#confirmDeleteModal').modal('hide');
 }
 </script>
 <bh></bh>
@@ -573,9 +649,16 @@ function confirmDelete() {
           const tableBody = document.querySelector('#panneauxTable tbody');
 
           data.forEach(function (panneau) {
+            var visible 
+if (panneau.visibilite == "OUI") {
+  visible= "visible/OUI.png"
+} else if(panneau.visibilite == "NON") {
+  visible= "visible/NON.png"
+
+}
               var row = document.createElement('tr');
               row.innerHTML = `
-                  <td><input type="checkbox"</td>
+                  <td><input type="radio" name="panneaux" value="${panneau._id}"></td>
                   <td><a href="#" class="text-primary fw-bold">${panneau.code_face}</a></td>
                   <td>${panneau.zone}</td>
                   <td>${panneau.region}</td>
@@ -584,7 +667,7 @@ function confirmDelete() {
                   <td>${panneau.type}</td>
                   <td>${panneau.face}</td>
                   <td>${panneau.eclairage}</td>
-                  <td>${panneau.visibilite}</td>
+                  <td><img src="${visible}"></td>
                   <td>${panneau.metrage}</td>
                   <td>${panneau.prix}</td>
                   <td>${panneau.trafic_routier}</td>

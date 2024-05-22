@@ -30,4 +30,32 @@ router.post('/', async (req, res) => {
     }
 });
 
+//UPDATE modifier comptes
+router.put('/:id', async (req, res) => {
+    try {
+        let comptes = await CompteModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!comptes) {
+            return res.status(404).send('No users with the given ID was found!');
+        }
+        res.send(comptes);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(400).send('The users could not be updated!');
+    }
+});
+
+// DELETE supprimer comptes
+router.delete('/:id', async (req, res) => {
+    try {
+        let comptes = await CompteModel.findByIdAndDelete(req.params.id);
+        if (!comptes) {
+            return res.status(404).send('No comptes with the given ID was found!');
+        }
+        res.send(comptes);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(400).send('The comptes could not be deleted!');
+    }
+});
+
 module.exports = router;

@@ -51,10 +51,7 @@
                     </div>
                     <div class="modal-body">
                       <form id="ajouterForm">
-                        <div class="mb-3">
-                          <label for="photo" class="form-label">Photo:</label>
-                          <input type="text" id="photo" class="form-control" name="photo" required />
-                        </div>
+                        
                         <div class="mb-3">
                           <label for="nom-annonceur" class="form-label">Nom Annonceur:</label>
                           <input type="text" id="nom_annanceur" class="form-control" name="nom_annanceur" required />
@@ -84,79 +81,176 @@
               </div>
               &nbsp;&nbsp;
 
-              <!-- code  de la confirmation de modifier -->
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Modifier">
-                <i class="bi bi-pencil"></i>Modifier
-              </button>
-              <div class="modal fade" id="Modifier" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <label for="editPhoto" class="form-label">Photo</label>
-                          <input type="image" class="form-control" id="editPhoto">
-                        </div>
-                        <div class="mb-3">
-                          <label for="editNomAnnanceur" class="form-label">Nom Annanceur</label>
-                          <input type="text" class="form-control" id="editNomAnnanceur">
-                        </div>
-                        <div class="mb-3">
-                          <label for="media-vusiel" class="form-label">Média Vusiel:</label>
-                          <input type="text" id="media-vusiel" class="form-control" name="media-vusiel" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="editDatePublication" class="form-label">Date Publication</label>
-                          <input type="text" class="form-control" id="editDatePublication" >
-                        </div>
-                        <div class="mb-3">
-                          <label for="DateRetrait" class="form-label">Date Retrait</label>
-                          <input type="text" class="form-control" id="DateRetrait" >
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-success"><i class="bi bi-check-circle"> </i>Confirmer</button>
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- Bouton pour ouvrir la fenêtre modale -->
+<button type="button" class="btn btn-warning" onclick="openModifierModal()">
+  <i class="bi bi-pencil"></i> Modifier
+</button>
+
+<!-- Fenêtre modale -->
+<div class="modal fade" id="Modifier" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nom_annanceur_input" class="form-label">Nom Annanceur</label>
+            <input type="text" class="form-control" id="nom_annanceur_input">
+          </div>
+          <div class="mb-3">
+            <label for="media_vusiel_input" class="form-label">Média Vusiel</label>
+            <input type="text" class="form-control" id="media_vusiel_input">
+          </div>
+          <div class="mb-3">
+            <label for="date_publication_input" class="form-label">Date Publication</label>
+            <input type="text" class="form-control" id="date_publication_input">
+          </div>
+          <div class="mb-3">
+            <label for="date_retrait_input" class="form-label">Date Retrait</label>
+            <input type="text" class="form-control" id="date_retrait_input">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="confirmModification()">
+          <i class="bi bi-check-circle"></i> Confirmer
+        </button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModifierModal() {
+    var checkboxChecked = $("#archivescompagnesTable tbody input[name='archivescompagnes']:checked").length > 0;
+
+    if (checkboxChecked) {
+      var selectedRow = $("#archivescompagnesTable tbody input[name='archivescompagnes']:checked").closest('tr');
+
+      var nomAnnanceur = selectedRow.find('td:eq(1)').text().trim();
+      var mediaVusiel = selectedRow.find('td:eq(2)').text().trim();
+      var datePublication = selectedRow.find('td:eq(3)').text().trim();
+      var dateRetrait = selectedRow.find('td:eq(4)').text().trim();
+
+      // Affecter les valeurs aux champs du formulaire
+      $('#nom_annanceur_input').val(nomAnnanceur);
+      $('#media_vusiel_input').val(mediaVusiel);
+      $('#date_publication_input').val(datePublication);
+      $('#date_retrait_input').val(dateRetrait);
+      $('#Modifier').modal('show'); // Modifier l'ID de la modal ici
+    } else {
+      alert("Veuillez cocher au moins une case avant de modifier.");
+    }
+  }
+
+  function confirmModification() {
+    // Récupérer les valeurs des champs
+    var nomAnnanceur = $('#nom_annanceur_input').val();
+    var mediaVusiel = $('#media_vusiel_input').val();
+    var datePublication = $('#date_publication_input').val();
+    var dateRetrait = $('#date_retrait_input').val();
+    // Traiter les valeurs récupérées
+
+    // Cacher la modal
+    $('#Modifier').modal('hide');
+  }
+</script>
+
+              
               &nbsp;&nbsp;
 
 
-               <!-- code  de la confirmation de suppression -->
-               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Supprimer">
-                <i class="bi bi-trash"></i> Supprimer
-              </button>
-              <div class="modal fade" id="Supprimer" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                    </div>
-                    <div class="modal-body">
-                      Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                      <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i>Supprimer</button>
-                    </div>
-                  </div>
-                </div>
-              </div>  
+                <!-- code  de la confirmation de suppression -->
+<button type="button" class="btn btn-danger" data-bs-target="#confirmDeleteModal"  onclick="deleteAction()">
+  <i class="bi bi-trash"></i> Supprimer
+  </button>
+  <!-- Fenêtre de confirmation de suppression -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      Êtes-vous sûr de vouloir supprimer les lignes sélectionnées ?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+      <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
+    </div>
+  </div>
+  </div>
+  </div>
+        
+           <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
+            
+  
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+</section> 
+           <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+           <script>
+            var deletedIDArchivescompagne; // Global variable to store the selected ID
+            
+            function deleteAction() {
+              // Check if at least one checkbox is checked
+              var checkedItems = $("#archivescompagnesTable tbody input[name='archivescompagnes']:checked");
+            
+              if (checkedItems.length > 0) {
+                // Store the ID of the checked item
+                deletedIDArchivescompagne = checkedItems.val();
+                
+                // Show the delete confirmation modal
+                $('#confirmDeleteModal').modal('show');
+              } else {
+                alert("Veuillez cocher au moins une case avant de supprimer.");
+              }
+            }
+            
+            // Function to confirm deletion
+            function confirmDelete() {
+              if (!deletedIDArchivescompagne) {
+                alert("Aucune ID sélectionnée pour la suppression.");
+                return;
+              }
+            
+              // Send an AJAX request to delete the item by ID
+              $.ajax({
+                url: 'http://localhost:3001/archivescompagnes/' + deletedIDArchivescompagne,
+                type: 'DELETE',
+                success: function(response) {
+                  // Handle success
+                  console.log("Deletion successful", response);
+            
+                  // Remove the corresponding row from the table
+                  $("#archivescompagnesTable tbody input[name='archivescompagnes']:checked").closest('tr').remove();
+            
+                  // Hide the modal
+                  $('#confirmDeleteModal').modal('hide');
+                },
+                error: function(error) {
+                  // Handle error
+                  console.log("Deletion failed", error);
+                }
+              });
+            }
+            </script>  
          <!-- Button pour ouvrir la fenêtre de confirmation de suppression -->
          <br>
          <br>
                               <thead>
                         <tr>
                           <th></th>
-                          <th scope="col">Photo</th>
+                          
                           <th scope="col">Nom Annanceur</th>
                           <th scope="col">Média Vusiel</th>
                           <th data-type="date" data-format="YYYY/DD/MM">Date Publication</th>
@@ -220,8 +314,7 @@
           data.forEach(function (archivescompagne) {
               var row = document.createElement('tr');
               row.innerHTML = `
-                  <td><input type="checkbox"</td>
-                  <td><img src="${archivescompagne.photo}" style="max-width: 100px; max-height: 100px;"></td>
+              <td><input type="radio" name="archivescompagnes" value="${archivescompagne._id}"></td>
                   <td>${archivescompagne.nom_annanceur}</td>
                   <td>${archivescompagne.media_vusiel}</td>
                   <td>${archivescompagne.date_publication}</td>

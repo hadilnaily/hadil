@@ -55,7 +55,6 @@ router.post('/', async (req, res) => { // Utilisez app.post() au lieu de router.
         type_publication: req.body.type_publication,
         date_publication: req.body.date_publication,
         date_retrait: req.body.date_retrait,
-        photo: req.body.photo,
         media_vusiel: req.body.media_vusiel,
         cree_a: new Date().toISOString(), // Set current date/time as creation date
         mis_a_jour_a: null // No update date initially

@@ -12,6 +12,7 @@
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -251,6 +252,7 @@
                   <label for="inputMotdePasse4" class="form-label">Mot de Passe</label>
                   <input type="MotdePasse" class="form-control" id="mot_de_passe" name="mot_de_passe" required>
                 </div>
+                
                 <div class="text-center">
                   
                   <!-- code  de la confirmation Ajouter -->
@@ -279,7 +281,7 @@
     
               <!-- Tableau des comptes -->
               <div class="table-responsive">
-                <table class="table table-striped"  id="comptesTable">
+                <table class="table table-striped"  id="comptesTable" id="comptesTable" class="table">
                   <thead>
                     <tr>
                       
@@ -304,33 +306,35 @@
       </div>
     </section>
    
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-          const toggleButton = document.getElementById('toggleButton');
-          const icon = toggleButton.querySelector('i');
-          const text = toggleButton.querySelector('span');
-  
-          let isActive = true;
-  
-          toggleButton.addEventListener('click', function () {
+   <script>
+    function attachToggleListeners() {
+          const toggleButtons = document.querySelectorAll('.toggleButton');
+          toggleButtons.forEach(function (toggleButton) {
+            const icon = toggleButton.querySelector('i');
+            const text = toggleButton.querySelector('span');
+            let isActive = icon.classList.contains('bi-toggle-on');
+
+            toggleButton.addEventListener('click', function () {
               isActive = !isActive;
-  
               if (isActive) {
-                  toggleButton.classList.remove('btn-secondary');
-                  toggleButton.classList.add('btn-success');
-                  icon.classList.remove('bi-toggle-off');
-                  icon.classList.add('bi-toggle-on');
-                  text.textContent = 'Activer';
+                toggleButton.classList.remove('btn-secondary');
+                toggleButton.classList.add('btn-success');
+                icon.classList.remove('bi-toggle-off');
+                icon.classList.add('bi-toggle-on');
+                text.textContent = 'Activer';
               } else {
-                  toggleButton.classList.remove('btn-success');
-                  toggleButton.classList.add('btn-secondary');
-                  icon.classList.remove('bi-toggle-on');
-                  icon.classList.add('bi-toggle-off');
-                  text.textContent = 'Désactiver';
+                toggleButton.classList.remove('btn-success');
+                toggleButton.classList.add('btn-secondary');
+                icon.classList.remove('bi-toggle-on');
+                icon.classList.add('bi-toggle-off');
+                text.textContent = 'Désactiver';
               }
+            });
           });
-      });
-  </script>
+        }
+   </script>
+
+      
   
   
   
@@ -387,7 +391,6 @@
   }
 
   // Populate the table with fetched data
-  // Populate the table with fetched data
 async function populateTable() {
     try {
         const data = await fetchData();
@@ -402,14 +405,77 @@ async function populateTable() {
     <td>${comptes.email}</td>
     <td>${comptes.adresse}</td>
     <td class="btn-group">
-        <!-- Boutons d'action -->
-        <button type="button" class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#Modifier">
-            <i class="bi bi-pencil"></i>
-        </button>
-        <button type="button" class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#Supprimer">
-            <i class="bi bi-trash"></i>
-        </button>
-        <button type="button" class="btn btn-success btn-sm toggleButton me-1" data-toggle="toggle">
+
+
+      <!-- Boutons d'action -->
+<button type="button" class="btn btn-warning btn-sm me-1" onclick="openModifierModal(this)">
+    <i class="bi bi-pencil"></i>
+</button>
+<!-- Fenêtre modale de confirmation de modification -->
+<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <form id="modificationForm">
+          <div class="mb-3">
+            <label for="dateDebutPromo" class="form-label">Nom:</label>
+            <input type="text" class="form-control" id="nom_input">
+          </div>
+          <div class="mb-3">
+            <label for="dateFinPromo" class="form-label">Téléphone:</label>
+            <input type="text" class="form-control" id="Tel_input">
+          </div>
+          <div class="mb-3">
+            <label for="prixNative" class="form-label">Email:</label>
+            <input type="text" class="form-control" id="email_input">
+          </div>
+          <div class="mb-3">
+            <label for="promo" class="form-label">Adresse:</label>
+            <input type="text" class="form-control" id="adresse_input">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="confirmModification()"><i class="bi bi-check-circle"></i> Confirmer</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+        <button type="button" class="btn btn-danger btn-sm me-1" data-bs-target="#confirmDeleteModal" onclick=deleteAction("${comptes._id}")>
+  <i class="bi bi-trash"></i>
+</button>
+
+        <!-- Modal de confirmation de suppression des comptes -->
+<div class="modal fade" id="confirmDeleteModalComptes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer ce compte ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+        <button type="button" class="btn btn-success btn-sm toggleButton me-1" data-toggle="toggle" onclick="attachToggleListeners()">
             <i class="bi bi-toggle-on"></i>
         </button>
     </td>
@@ -463,6 +529,65 @@ populateTable(); // Call the function to populate the table
     
     
     </script>
+
+<script>
+
+
+  // Fonction pour confirmer la suppression
+  function deleteAction(id) {
+console.log(id);
+    $.ajax({
+      url: 'http://localhost:3001/comptes/' + id, // Remplacez par l'URL de suppression côté serveur
+      type: 'DELETE', // Utilisez la méthode DELETE
+      success: function(response) {
+        // Gérer le succès
+        console.log("Suppression réussie", response);
+
+        // Supprimer la ligne correspondante du tableau
+       // $("#comptesTable tbody input[name='comptes']:checked").closest('tr').remove();
+
+        // Masquer la modal
+      //  $('#confirmDeleteModal').modal('hide');
+      },
+      error: function(error) {
+        // Gérer l'erreur
+        console.log("Échec de la suppression", error);
+      }
+    });
+  }
+</script>
+
+<script>
+  // Fonction pour ouvrir la fenêtre de modification
+  function openModifierModal(button) {
+    var selectedRow = $(button).closest('tr');
+    var nom = selectedRow.find('td:eq(0)').text().trim();
+    var Tel = selectedRow.find('td:eq(1)').text().trim();
+    var email = selectedRow.find('td:eq(2)').text().trim();
+    var adresse = selectedRow.find('td:eq(3)').text().trim();
+
+    // Pré-remplissez les champs du formulaire dans la fenêtre modale de modification
+    $('#nom_input').val(nom);
+    $('#Tel_input').val(Tel);
+    $('#email_input').val(email);
+    $('#adresse_input').val(adresse);
+
+    // Affichez la fenêtre modale de modification
+    $('#modifierModal').modal('show');
+  }
+
+  function confirmModification() {
+    // Récupérer les valeurs des champs
+    var nom = $('#nom_input').val().trim();
+    var Tel = $('#Tel_input').val().trim();
+    var email = $('#email_input').val().trim();
+    var adresse = $('#adresse_input').val().trim();
+  
+    // Fermer la modale
+    $('#modifierModal').modal('hide');
+  }
+</script>
+
 
 </html> 
 

@@ -276,10 +276,12 @@
                   
   <!-- Bouton pour ouvrir la fenêtre de confirmation de modification -->
   
+ 
+
   <button type="button" class="btn btn-warning" onclick="openModifierModal()">
     <i class="bi bi-pencil"></i> Modifier
   </button>
-  <!-- Fenêtre modale de confirmation de modification -->
+  
   <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -291,49 +293,72 @@
           <form id="modificationForm">
             <div class="mb-3">
               <label for="dateDebutPromo" class="form-label">Date Début Promo:</label>
-              <input type="text" class="form-control" id="dateDebutPromo" name="dateDebutPromo" >
+              <input type="text" class="form-control" id="date_deb_promo_input">
             </div>
             <div class="mb-3">
               <label for="dateFinPromo" class="form-label">Date Fin Promo:</label>
-              <input type="text" class="form-control" id="dateFinPromo" name="dateFinPromo">
+              <input type="text" class="form-control" id="date_fin_promo_input">
             </div>
             <div class="mb-3">
               <label for="prixNative" class="form-label">Prix Native:</label>
-              <input type="text" class="form-control" id="prixNative" name="prixNative" >
+              <input type="text" class="form-control" id="prix_native_input">
             </div>
             <div class="mb-3">
               <label for="promo" class="form-label">Promo:</label>
-              <input type="text" class="form-control" id="promo" name="promo" >
+              <input type="text" class="form-control" id="promo_input">
             </div>
             <div class="mb-3">
               <label for="prixPromotion" class="form-label">Prix Promotion:</label>
-              <input type="text" class="form-control" id="prixPromotion" name="prixPromotion" >
+              <input type="text" class="form-control" id="prix_promotion_input">
             </div>
-            
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" onclick="confirmModifier()"><i class="bi bi-check-circle"></i> Confirmer</button>
+          <button type="button" class="btn btn-success" onclick="confirmModification()"><i class="bi bi-check-circle"></i> Confirmer</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
         </div>
       </div>
     </div>
   </div>
-  <!-- Script JavaScript pour vérifier si la case à cocher est cochée -->
-  <script>
-    function openModifierModal() {
-      // Vérifier si la case à cocher est cochée
-      var checkboxChecked = $("#prixTable tbody input[type='checkbox']:checked").length > 0;
   
-      if (checkboxChecked) {
-        // Si la case est cochée, afficher la modale de modification
-        $('#modifierModal').modal('show');
-      } else {
-        // Si la case n'est pas cochée, afficher un message d'erreur
-        alert("Veuillez cocher au moins une case avant de modifier.");
-      }
+  <script>
+  function openModifierModal() {
+    var checkboxChecked = $("#prixTable tbody input[name='prix']:checked").length > 0;
+  
+    if (checkboxChecked) {
+      var selectedRow = $("#prixTable tbody input[name='prix']:checked").closest('tr');
+      var dateDebutPromo = selectedRow.find('td:eq(1)').text().trim();
+      var dateFinPromo = selectedRow.find('td:eq(2)').text().trim();
+      var prixNative = selectedRow.find('td:eq(3)').text().trim();
+      var promo = selectedRow.find('td:eq(4)').text().trim();
+      var prixPromotion = selectedRow.find('td:eq(5)').text().trim();
+  
+      $('#date_deb_promo_input').val(dateDebutPromo);
+      $('#date_fin_promo_input').val(dateFinPromo);
+      $('#prix_native_input').val(prixNative);
+      $('#promo_input').val(promo);
+      $('#prix_promotion_input').val(prixPromotion);
+  
+      $('#modifierModal').modal('show');
+    } else {
+      alert("Veuillez cocher au moins une case avant de modifier.");
     }
+  }
+  
+  function confirmModification() {
+    // Récupérer les valeurs des champs
+    var dateDebutPromo = $('#date_deb_promo_input').val();
+    var dateFinPromo = $('#date_fin_promo_input').val();
+    var prixNative = $('#prix_native_input').val();
+    var promo = $('#promo_input').val();
+    var prixPromotion = $('#prix_promotion_input').val();
+  
+    // Fermer la modale
+    $('#modifierModal').modal('hide');
+  }
   </script>
+  
+  
                
   <!-- Bouton pour supprimer -->
   
@@ -363,29 +388,47 @@
           <!-- code pour la supprimer -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
-              function deleteAction() {
-                // Vérifier si au moins une case est cochée
-                var atLeastOneChecked = $("#prixTable tbody input[type='checkbox']:checked").length > 0;
-                
-                if (!atLeastOneChecked) {
-                  // Si aucune case n'est cochée, afficher un message d'erreur
-                  alert("Veuillez cocher au moins une case avant de supprimer.");
-                } else {
-                  // Si au moins une case est cochée, afficher la fenêtre de confirmation
-                  $('#confirmDeleteModal').modal('show');
-                }
-              }
-            
-              // Fonction pour confirmer la suppression
-              function confirmDelete() {
-                // Supprimer les lignes sélectionnées du tableau
-                $("#prixTable tbody input[type='checkbox']:checked").each(function() {
-                  $(this).closest('tr').remove();
-                });
-                
-                // Masquer la fenêtre modale
-                $('#confirmDeleteModal').modal('hide');
-              }
+              var deletedIDPrix; // Global variable to store the selected ID
+function deleteAction() {
+  // Vérifier si au moins une case est cochée
+  var atLeastOneChecked = $("#prixTable tbody input[name='prix']:checked").length > 0;
+  
+  if (atLeastOneChecked) {
+    $("#prixTable tbody input[name='prix']:checked").each(function() {
+    deletedIDPrix= $(this).val();
+
+});
+    // Si au moins une case est cochée, afficher la fenêtre de confirmation
+    $('#confirmDeleteModal').modal('show');
+
+  } else {
+    alert("Veuillez cocher au moins une case avant de supprimer.");
+
+  }
+}
+function confirmDelete() {
+  console.log(deletedIDPrix);
+
+  // Send an AJAX request to delete the item by ID
+  $.ajax({
+    url: 'http://localhost:3001/prix/' + deletedIDPrix, // Replace with your server-side delete URL
+    type: 'DELETE', // Use DELETE method
+    success: function(response) {
+      // Handle success
+      console.log("Deletion successful", response);
+
+      // Remove the corresponding row from the table
+      $("#prixTable tbody input[name='prix']:checked").closest('tr').remove();
+
+      // Hide the modal
+      $('#confirmDeleteModal').modal('hide');
+    },
+    error: function(error) {
+      // Handle error
+      console.log("Deletion failed", error);
+    }
+  });
+}
             </script>
 
             <br>
@@ -468,7 +511,7 @@
           data.forEach(function (prix) {
               var row = document.createElement('tr');
               row.innerHTML = `
-                  <td><input type="checkbox" ></td>
+              <td><input type="radio" name="prix" value="${prix._id}"></td>
                   <td>${prix.date_deb_promo}</td>
                   <td>${prix.date_fin_promo}</td>
                   <td>${prix.prix_native}</td>

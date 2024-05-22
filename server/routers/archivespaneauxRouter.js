@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 //UPDATE modifier panneaux
 router.put('/:id', async (req, res) => {
     try {
-        let archivespanneaux = await ArchivesPanneauModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        let archivespanneaux = await ArchivespanneauModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!archivespanneaux) {
             return res.status(404).send('No users with the given ID was found!');
         }
@@ -46,19 +46,21 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// DELETE supprimer panneaux
+
+// DELETE an archivespanneau
 router.delete('/:id', async (req, res) => {
     try {
-        let panneaux = await PanneauModel.findByIdAndDelete(req.params.id);
-        if (!panneaux) {
-            return res.status(404).send('No panneau with the given ID was found!');
+        let archivespanneaux = await ArchivespanneauModel.findByIdAndDelete(req.params.id);
+        if (!archivespanneaux) {
+            return res.status(404).send('No archivespanneau with the given ID was found!');
         }
-        res.send(panneaux);
+        res.send(archivespanneaux);
     } catch (error) {
         console.error("Error:", error);
-        res.status(400).send('The panneau could not be deleted!');
+        res.status(400).send('The archives panneau could not be deleted!');
     }
 });
+
 
 
 

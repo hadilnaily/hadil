@@ -20,6 +20,8 @@ router.get('/promo/:promo', async (req, res) => {
     }
 });
 
+
+
 //POST ajouter prix
 router.post('/', async (req, res) => { // Utilisez app.post() au lieu de router.post()  
     let prix = new PrixModel({
@@ -54,6 +56,7 @@ router.put('/:id', async (req, res) => {
         res.status(400).send('The users could not be updated!');
     }
 });
+
 
 // DELETE supprimer prix
 router.delete('/:id', async (req, res) => {
