@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Archives compagnes</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    .img-fluid {
+      max-width: 100px; /* Réglez la taille maximale de l'image ici */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Archive compagnes</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              
+        <div class="col-12 text-end mb-3">
+          <i id="download-pdf" class="bi bi-file-earmark-pdf btn-icon" style="font-size: 2em; color: red; cursor: pointer;"></i>
+          <i id="download-excel" class="bi bi-file-earmark-excel btn-icon" style="font-size: 2em; color: green; cursor: pointer;"></i>
+        </div>
+        
+        <style>
+          .btn-icon {
+            margin-right: 15px;
+          }
+        </style>
+              <table class="table table-striped" id="compagnesArchiveTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Nom annanceur</th>
+                    <th scope="col">media vusiel</th>
+                    <th data-type="date" data-format="YYYY/DD/MM">Date Publication</th>
+                    <th data-type="date" data-format="YYYY/DD/MM">Date Retrait</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-center">
+                <a href="Archives.html" class="btn btn-secondary mx-2">Retour</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+
+ <!-- ======= Footer ======= -->
+ <footer id="footer" class="footer">
+  <div class="copyright">
+    <strong><span>Espace Client</span></strong>
+    <div class="social-links mt-2">
+      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+  <div class="credits">
+    <a href="https://bootstrapmade.com/"></a>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/chart.js/chart.umd.js"></script>
+<script src="assets/vendor/echarts/echarts.min.js"></script>
+<script src="assets/vendor/quill/quill.min.js"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+
+<script>
+  document.getElementById('download-pdf').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const table = document.getElementById('compagnesArchiveTable');
+    const rows = Array.from(table.rows).map(row => Array.from(row.cells).map(cell => cell.innerText));
+
+    const headers = rows.shift(); // Remove the first row for headers
+    const data = rows;
+
+    doc.autoTable({
+      head: [headers],
+      body: data,
+    });
+
+    doc.save('archivecompagnes.pdf');
+  });
+</script>
+
+<script>
+  document.getElementById('download-excel').addEventListener('click', () => {
+    const table = document.getElementById('compagnesArchiveTable');
+    const wb = XLSX.utils.table_to_book(table, {sheet: "archivecompagnes"});
+
+    XLSX.writeFile(wb, 'archivecompagnes.xlsx');
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/archivescompagnes/');
+        return response.json();
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+        throw error;
+      }
+    };
+
+    // Populate the table with fetched data
+    const populateTable = (data) => {
+      const tableBody = document.querySelector('#compagnesArchiveTable tbody');
+      tableBody.innerHTML = '';
+      data.forEach((archivecompagne) => {
+        const row = document.createElement('tr');
+        let mediaElement = '';
+
+        if (archivecompagne.media_vusiel) {
+          if (archivecompagne.media_vusiel.endsWith('.jpg') || archivecompagne.media_vusiel.endsWith('.png')) {
+            mediaElement = `<img src="${archivecompagne.media_vusiel}" style="max-width:100px; max-height:100px;">`;
+          } else if (archivecompagne.media_vusiel.endsWith('.mp4')) {
+            mediaElement = `<video controls style="max-width:100px; max-height:100px;">
+                              <source src="${archivecompagne.media_vusiel}" type="video/mp4">
+                              Your browser does not support the video tag.
+                            </video>`;
+          }
+        }
+
+        row.innerHTML = `
+          <td>${archivecompagne.nom_annanceur}</td>
+          <td>${mediaElement}</td>
+          <td>${archivecompagne.date_publication}</td>
+          <td>${archivecompagne.date_retrait}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    };
+
+    // Fetch data and populate the table
+    const data = await fetchData();
+    populateTable(data);
+  });
+</script>
+</body>
+</html>

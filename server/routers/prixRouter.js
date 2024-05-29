@@ -72,7 +72,16 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-
+//get only
+router.get("/onlypromo", async (req, res) => {
+    try {
+        const prix = await PrixModel.find({}, 'promo'); // Seuls les champs' promo' sont renvoyés
+        res.json(prix);
+    } catch (error) {
+        console.error("Erreur :", error);
+        res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+});
 
 
 module.exports= router;

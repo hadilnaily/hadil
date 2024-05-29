@@ -9,6 +9,82 @@ router.get("/", async (req, res)=>{
     res.json(panneaux)
 })
 
+router.get('/zone/:zone', async (req, res) => {
+    try {
+        const panneau = await PanneauModel.findOne({ zone: req.params.zone });
+        if (!panneau) {
+            return res.status(404).json({ message: 'The panneau with the given zone was not found.' });
+        }
+        res.status(200).json(panneau);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/region/:region', async (req, res) => {
+    try {
+        const panneau = await PanneauModel.findOne({ region: req.params.region });
+        if (!panneau) {
+            return res.status(404).json({ message: 'The panneau with the given region was not found.' });
+        }
+        res.status(200).json(panneau);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+router.get('/emplacement/:emplacement', async (req, res) => {
+    try {
+        const panneau = await PanneauModel.findOne({ emplacement: req.params.emplacement });
+        if (!panneau) {
+            return res.status(404).json({ message: 'The panneau with the given emplacement was not found.' });
+        }
+        res.status(200).json(panneau);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/regie/:regie', async (req, res) => {
+    try {
+        const panneau = await PanneauModel.findOne({ regie: req.params.regie });
+        if (!panneau) {
+            return res.status(404).json({ message: 'The panneau with the given regie was not found.' });
+        }
+        res.status(200).json(panneau);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/type/:type', async (req, res) => {
+    try {
+        const panneau = await PanneauModel.findOne({ type: req.params.type });
+        if (!panneau) {
+            return res.status(404).json({ message: 'The panneau with the given type was not found.' });
+        }
+        res.status(200).json(panneau);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/face/:face', async (req, res) => {
+    try {
+        const panneau = await PanneauModel.findOne({ face: req.params.face });
+        if (!panneau) {
+            return res.status(404).json({ message: 'The panneau with the given face was not found.' });
+        }
+        res.status(200).json(panneau);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 //POST ajouter panneaux
 router.post('/', async (req, res) => {
@@ -70,6 +146,63 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+
+
+// getonly
+router.get("/onlyzone", async (req, res) => {
+    try {
+        const panneaux = await PanneauModel.find({}, 'zone'); // Seuls les champs 'zone' sont renvoyés
+        res.json(panneaux);
+    } catch (error) {
+        console.error("Erreur :", error);
+        res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+});
+router.get("/onlyregion", async (req, res) => {
+    try {
+        const panneaux = await PanneauModel.find({}, 'region'); // Seuls les champs 'region' sont renvoyés
+        res.json(panneaux);
+    } catch (error) {
+        console.error("Erreur :", error);
+        res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+});
+router.get("/onlyemplacement", async (req, res) => {
+    try {
+        const panneaux = await PanneauModel.find({}, 'emplacement'); // Seuls les champs 'emplacement' sont renvoyés
+        res.json(panneaux);
+    } catch (error) {
+        console.error("Erreur :", error);
+        res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+});
+router.get("/onlyregie", async (req, res) => {
+    try {
+        const panneaux = await PanneauModel.find({}, 'regie'); // Seuls les champs 'regie' sont renvoyés
+        res.json(panneaux);
+    } catch (error) {
+        console.error("Erreur :", error);
+        res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+});
+router.get("/onlytype", async (req, res) => {
+    try {
+        const panneaux = await PanneauModel.find({}, 'type'); // Seuls les champs 'type' sont renvoyés
+        res.json(panneaux);
+    } catch (error) {
+        console.error("Erreur :", error);
+        res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+});
+router.get("/onlyface", async (req, res) => {
+    try {
+        const panneaux = await PanneauModel.find({}, 'face'); // Seuls les champs 'face' sont renvoyés
+        res.json(panneaux);
+    } catch (error) {
+        console.error("Erreur :", error);
+        res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+});
 
 
 module.exports= router;

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Archives panneaux</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    .img-fluid {
+      max-width: 100px; /* Réglez la taille maximale de l'image ici */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Archive panneaux</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              
+        <div class="col-12 text-end mb-3">
+          <i id="download-pdf" class="bi bi-file-earmark-pdf btn-icon" style="font-size: 2em; color: red; cursor: pointer;"></i>
+          <i id="download-excel" class="bi bi-file-earmark-excel btn-icon" style="font-size: 2em; color: green; cursor: pointer;"></i>
+        </div>
+        
+        <style>
+          .btn-icon {
+            margin-right: 15px;
+          }
+        </style>
+              <table  class="table table-striped"  id="panneauxArchiveTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Code face</th>
+                    <th scope="col">region</th>
+                    <th scope="col">Emplacement</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Trafic Routier</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Date de création</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                
+              </table>
+               <!-- Bouton "Retour" -->
+  <div class="d-flex justify-content-center">
+    <a href="Archives.html" class="btn btn-secondary mx-2">Retour</a>
+  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- ======= Footer ======= -->
+ <footer id="footer" class="footer">
+  <div class="copyright">
+    <strong><span>Espace Client</span><div class="social-links mt-2">
+      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div></strong>
+  </div>
+<!-- ======= Footer ======= -->
+  <div class="credits">
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+    <a href="https://bootstrapmade.com/"></a>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/chart.js/chart.umd.js"></script>
+<script src="assets/vendor/echarts/echarts.min.js"></script>
+<script src="assets/vendor/quill/quill.min.js"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+
+<script>
+  document.getElementById('download-pdf').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const table = document.getElementById('panneauxArchiveTable');
+    const rows = Array.from(table.rows).map(row => Array.from(row.cells).map(cell => cell.innerText));
+
+    const headers = rows.shift(); // Remove the first row for headers
+    const data = rows;
+
+    doc.autoTable({
+      head: [headers],
+      body: data,
+    });
+
+    doc.save('archivepanneaux.pdf');
+  });
+</script>
+
+<script>
+  document.getElementById('download-excel').addEventListener('click', () => {
+    const table = document.getElementById('panneauxArchiveTable');
+    const wb = XLSX.utils.table_to_book(table, {sheet: "archivepanneaux"});
+
+    XLSX.writeFile(wb, 'archivepanneaux.xlsx');
+  });
+</script>
+<script>
+  async function fetchData() {
+    try {
+      const response = await fetch('http://localhost:3001/archivespanneaux/');
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error;
+    }
+  }
+
+  async function populateTable() {
+    try {
+      const data = await fetchData();
+      const tableBody = document.querySelector('#panneauxArchiveTable tbody');
+
+      data.forEach(function (archivepanneau) {
+        var row = document.createElement('tr');
+        row.innerHTML = `
+        <td><a href="#" class="text-primary fw-bold">${archivepanneau.code_face}</a></td>
+          <td>${archivepanneau.region}</td>
+          <td>${archivepanneau.emplacement}</td>
+          <td>${archivepanneau.type}</td>
+          <td>${archivepanneau.prix}</td>
+          <td>${archivepanneau.trafic_routier}</td>
+          <td><img src="${archivepanneau.photo}" style="max-width:100px; max-height:100px;"></td>
+          <td>${archivepanneau.cree_a}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    } catch (error) {
+      console.error('Error populating table:', error);
+    }
+  }
+
+  populateTable();
+</script>
+</body>
+</html>

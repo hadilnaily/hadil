@@ -40,6 +40,7 @@ const ContactModel = require('./models/Contacts')
 //IMPORT archivespanneaux MODEL
 const ArchivespanneauModel = require('./models/Archivespanneaux')
 
+
 //IMPORT archivescompagnes MODEL
 const ArchivescompagneModel = require('./models/Archivescompagnes')
 
@@ -74,7 +75,7 @@ app.use('/contacts',getContacts)
 const getStatistic = require ('./routers/statistics');
 app.use('/statistic',getStatistic)
 
-const getArchivesPanneaux = require ('./routers/archivespaneauxRouter');
+const getArchivesPanneaux = require ('./routers/archivespanneauxRouter');
 app.use('/archivespanneaux',getArchivesPanneaux)
 
 const getArchivesCompagnes = require ('./routers/archivescompagnesRouter');

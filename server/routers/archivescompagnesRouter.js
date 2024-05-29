@@ -1,12 +1,11 @@
 const express = require ("express");
 const router = express.Router();
-const CompagneModel = require('../models/Archivescompagnes');
-const ArchivescompagneModel = require("../models/Archivescompagnes");
+const ArchivecompagneModel = require("../models/Archivescompagnes");
 
 
 router.get("/", async (req, res)=>{
-    const archivescompagnes = await ArchivescompagneModel.find();
-    res.json(archivescompagnes)
+    const archivecompagnes = await ArchivecompagneModel.find();
+    res.json(archivecompagnes)
 })
 
 
@@ -15,7 +14,7 @@ router.get("/", async (req, res)=>{
 
 //POST ajouter compagnes
 router.post('/', async (req, res) => { // Utilisez app.post() au lieu de router.post()  
-    let archivescompagne = new CompagneModel({
+    let archivecompagne = new ArchivescompagneModel({
        
         nom_annanceur: req.body.nom_annanceur,
         media_vusiel: req.body.media_vusiel,
@@ -26,39 +25,39 @@ router.post('/', async (req, res) => { // Utilisez app.post() au lieu de router.
     });
 
     try {
-        archivescompagne = await archivescompagne.save();
-        res.send(archivescompagne);
+        archivecompagne = await archivecompagne.save();
+        res.send(archivecompagne);
     } catch (error) {
         console.error("Error:", error);
-        res.status(400).send('The archivescompagnes could not be created!');
+        res.status(400).send('The archivecompagnes could not be created!');
     }
 });
 
 //UPDATE modifier compagnes
 router.put('/:id', async (req, res) => {
     try {
-        let archivescompagne = await archivescompagneModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!archivescompagne) {
+        let archivecompagne = await ArchivecompagneModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!archivecompagne) {
             return res.status(404).send('No users with the given ID was found!');
         }
-        res.send(archivescompagne);
+        res.send(archivecompagne);
     } catch (error) {
         console.error("Error:", error);
         res.status(400).send('The users could not be updated!');
     }
 });
 
-// DELETE supprimer archivescompagnes
+// DELETE supprimer archivecompagnes
 router.delete('/:id', async (req, res) => {
     try {
-        let archivescompagnes = await ArchivescompagneModel.findByIdAndDelete(req.params.id);
-        if (!archivescompagnes) {
-            return res.status(404).send('No archivescompagnes with the given ID was found!');
+        let archivecompagnes = await ArchivecompagneModel.findByIdAndDelete(req.params.id);
+        if (!archivecompagnes) {
+            return res.status(404).send('No archivecompagnes with the given ID was found!');
         }
-        res.send(archivescompagnes);
+        res.send(archivecompagnes);
     } catch (error) {
         console.error("Error:", error);
-        res.status(400).send('The archivescompagnes could not be deleted!');
+        res.status(400).send('The archivecompagnes could not be deleted!');
     }
 });
 

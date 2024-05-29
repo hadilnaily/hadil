@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Gestion des comptes</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+           <!-- Logo -->
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="accueil.html" class="logo d-flex align-items-center">
+        <img src="assets/img/Panel Manager.png" alt="">
+        <span class="d-none d-lg-block">Tableau De Bord</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+    
+        
+
+          <!-- Search Icon-->
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            
+          </a>
+        </li><!-- End Search Icon-->
+
+
+          
+           
+
+           <!--Profile Iamge Icon -->
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span >K. Anderson</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Kevin Anderson</h6>
+              <span>Web Designer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="accueil.html">
+          <i class="bi bi-grid"></i>
+          <span>Accueil</span>
+        </a>
+      </li><!-- End Accueil Nav -->
+
+        <!-- Gestion des panneaux Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="Gestion-des-panneaux.html">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>Gestion des panneaux</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+           <!--Gestion des compagnes Nav -->
+     
+           <li class="nav-item">
+            <a class="nav-link collapsed" href="Gestion-des-compagnes.html">
+              <i class="bi bi-card-list"></i>
+              <span>Gestion des compagnes</span>
+            </a>
+          </li><!-- End Profile Page Nav -->
+    <!-- End Gestion des compagnes Nav -->
+
+         <!--Gestion prix-promo Nav -->
+      
+         <li class="nav-item">
+          <a class="nav-link collapsed " href="Gestion-prix-promo.html">
+            <i class="bi bi-tag-fill"></i>
+            <span>Gestion prix-promo</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  <!-- End Gestion prix-promo Nav -->
+      
+       <!-- End Gestion archive Nav -->
+      
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="Gestion-archive.html">
+          <i class="bi bi-stack"></i>
+          <span>Gestion archives</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+<!-- End Gestion archive Nav -->
+
+       <!--Gestion des comptes Nav -->
+     
+       <li class="nav-item">
+        <a class="nav-link " href="Gestion-des-comptes.html">
+          <i class="bi bi-person"></i>
+          <span>Gestion des comptes</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+<!-- End Gestion des comptes Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="Map.html">
+          <i class="bi bi-geo-alt"></i>
+          <span>Couverture Map</span>
+        </a>
+      </li><!-- End Map Page Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-person-circle"></i>
+          <span>Profile</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-contact.html">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+
+
+      
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+    
+  </div><!--Page Title -->
+    <div class="pagetitle">
+      <h1>Gestion des comptes</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Créer un compte</h5>
+
+              <!-- Vertical Form -->
+              <form class="row g-3" id="ajouterForm">
+                <div class="col-12">
+                  <label for="inputNom4" class="form-label">Nom</label>
+                  <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="col-12">
+                  <label for="inputTel4" class="form-label">Téléphone</label>
+                  <input type="text" class="form-control" id="Tel" name="Tel" required>
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">Email</label>
+                  <input type="text" class="form-control" id="email" placeholder="...@gmail.com" name="email" required>
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress4" class="form-label">Adresse</label>
+                  <input type="text" class="form-control" id="adresse" name="adresse" required>
+                </div>
+                <div class="col-12">
+                  <label for="inputMotdePasse4" class="form-label">Mot de Passe</label>
+                  <input type="MotdePasse" class="form-control" id="mot_de_passe" name="mot_de_passe" required>
+                </div>
+                
+                <div class="text-center">
+                  
+                  <!-- code  de la confirmation Ajouter -->
+                  <div class="modal-footer">
+                    <button type="button" id="submitButton" class="btn btn-success"><i class="bi bi-plus"></i>Ajouter</button>
+                    
+                  
+                  </div>
+              </div>
+                </div>
+              </form><!-- Vertical Form -->
+              
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Liste des comptes</h5>
+               <!-- code de telechargement pdf ou exel -->
+        <div class="col-12 text-end mb-3">
+          <i id="download-pdf" class="bi bi-file-earmark-pdf btn-icon" style="font-size: 2em; color: red; cursor: pointer;"></i>
+          <i id="download-excel" class="bi bi-file-earmark-excel btn-icon" style="font-size: 2em; color: green; cursor: pointer;"></i>
+        </div>
+        
+        <style>
+          .btn-icon {
+            margin-right: 15px;
+          }
+        </style>
+    
+              <!-- Tableau des comptes -->
+              <div class="table-responsive">
+                <table class="table table-striped"  id="comptesTable" id="comptesTable" class="table">
+                  <thead>
+                    <tr>
+                      
+                      <th>Nom</th>
+                      <th>Téléphone</th>
+                      <th>Email</th>
+                      <th>Adresse</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Exemple de ligne de compte -->
+                  
+                    <!-- Autres lignes de compte ici -->
+                  </tbody>
+                </table>
+              </div><!-- End Tableau des comptes -->
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+   
+   <script>
+    function attachToggleListeners() {
+          const toggleButtons = document.querySelectorAll('.toggleButton');
+          toggleButtons.forEach(function (toggleButton) {
+            const icon = toggleButton.querySelector('i');
+            const text = toggleButton.querySelector('span');
+            let isActive = icon.classList.contains('bi-toggle-on');
+
+            toggleButton.addEventListener('click', function () {
+              isActive = !isActive;
+              if (isActive) {
+                toggleButton.classList.remove('btn-secondary');
+                toggleButton.classList.add('btn-success');
+                icon.classList.remove('bi-toggle-off');
+                icon.classList.add('bi-toggle-on');
+                text.textContent = 'Activer';
+              } else {
+                toggleButton.classList.remove('btn-success');
+                toggleButton.classList.add('btn-secondary');
+                icon.classList.remove('bi-toggle-on');
+                icon.classList.add('bi-toggle-off');
+                text.textContent = 'Désactiver';
+              }
+            });
+          });
+        }
+   </script>
+
+      
+  
+  
+  
+  </main><!-- End #main -->
+
+  
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      <strong><span>Tableau De Bord</span>   <div class="social-links mt-2">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div></strong>
+    </div>
+ 
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      <a href="https://bootstrapmade.com/"></a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+<script>
+  // Fetch data mta3 el panneaux from the server
+  async function fetchData() {
+      try {
+          const response = await fetch('http://localhost:3001/comptes');
+          const data = await response.json();
+          return data;
+      } catch (error) {
+          console.error('Error fetching data:', error);
+          throw error; // bech n tcheki si famma erreur
+      }
+  }
+
+  // Populate the table with fetched data
+async function populateTable() {
+    try {
+        const data = await fetchData();
+        const tableBody = document.querySelector('#comptesTable tbody');
+
+        data.forEach(function (comptes) {
+            var row = document.createElement('tr');
+            row.innerHTML = `
+   
+    <td>${comptes.nom}</td>
+    <td>${comptes.Tel}</td>
+    <td>${comptes.email}</td>
+    <td>${comptes.adresse}</td>
+    <td class="btn-group">
+
+
+      <!-- Boutons d'action -->
+<button type="button" class="btn btn-warning btn-sm me-1" onclick="openModifierModal(this)">
+    <i class="bi bi-pencil"></i>
+</button>
+<!-- Fenêtre modale de confirmation de modification -->
+<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifierModalLabel">Confirmation de Modification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <form id="modificationForm">
+          <div class="mb-3">
+            <label for="dateDebutPromo" class="form-label">Nom:</label>
+            <input type="text" class="form-control" id="nom_input">
+          </div>
+          <div class="mb-3">
+            <label for="dateFinPromo" class="form-label">Téléphone:</label>
+            <input type="text" class="form-control" id="Tel_input">
+          </div>
+          <div class="mb-3">
+            <label for="prixNative" class="form-label">Email:</label>
+            <input type="text" class="form-control" id="email_input">
+          </div>
+          <div class="mb-3">
+            <label for="promo" class="form-label">Adresse:</label>
+            <input type="text" class="form-control" id="adresse_input">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="confirmModification()"><i class="bi bi-check-circle"></i> Confirmer</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+        <button type="button" class="btn btn-danger btn-sm me-1" data-bs-target="#confirmDeleteModal" onclick=deleteAction("${comptes._id}")>
+  <i class="bi bi-trash"></i>
+</button>
+
+        <!-- Modal de confirmation de suppression des comptes -->
+<div class="modal fade" id="confirmDeleteModalComptes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer ce compte ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+        <button type="button" class="btn btn-success btn-sm toggleButton me-1" data-toggle="toggle" onclick="attachToggleListeners()">
+            <i class="bi bi-toggle-on"></i>
+        </button>
+    </td>
+`;
+
+            tableBody.appendChild(row);
+        });
+
+        // Attach event listeners to toggle buttons
+        const toggleButtons = document.querySelectorAll('.toggleButton');
+        toggleButtons.forEach((button, index) => {
+            button.addEventListener('click', function () {
+                toggleActivation(index); // Call your toggleActivation function with appropriate index
+            });
+        });
+    } catch (error) {
+        console.error('Error populating table:', error);
+    }
+}
+
+populateTable(); // Call the function to populate the table
+
+  </script>
+
+ <!-- fonction ajouter -->
+ <script>
+  document.getElementById('submitButton').addEventListener('click', async function(event) {
+    event.preventDefault(); // Prevent the default button behavior
+  
+    const formData = new FormData(document.getElementById('ajouterForm')); // Create a FormData object from the form
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+    try {
+      const response = await fetch('http://localhost:3001/comptes/', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Comptes added successfully:', data);
+        window.location.href = 'Gestion-des-comptes.html';
+      } else {
+        console.error('Failed to add Gestion-des-comptes:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding Gestion-des-comptes:', error);
+    }
+  });
+    
+    
+    </script>
+<script>
+  // Fonction pour confirmer la suppression
+function deleteAction(id) {
+  console.log(id);
+  $.ajax({
+    url: 'http://localhost:3001/comptes/' + id, // Remplacez par l'URL de suppression côté serveur
+    type: 'DELETE', // Utilisez la méthode DELETE
+    success: function(response) {
+      // Gérer le succès
+      console.log("Suppression réussie", response);
+
+      // Supprimer la ligne correspondante du tableau
+      $("#comptesTable tbody input[name='comptes']:checked").closest('tr').remove();
+
+      // Masquer la modal
+      $('#confirmDeleteModal').modal('hide');
+
+      // Rafraîchir la page
+      location.reload();
+    },
+    error: function(error) {
+      // Gérer l'erreur
+      console.log("Échec de la suppression", error);
+    }
+  });
+}
+
+</script>
+
+
+<!-- fonction modifier -->
+<script>
+  var IDComptes;
+
+  function openModifierModal(button) {
+    var selectedRow = $(button).closest('tr');
+    var nom = selectedRow.find('td:eq(0)').text().trim();
+    var Tel = selectedRow.find('td:eq(1)').text().trim();
+    var email = selectedRow.find('td:eq(2)').text().trim();
+    var adresse = selectedRow.find('td:eq(3)').text().trim();
+    IDComptes = selectedRow.data('id');
+
+    if (!IDComptes) {
+      console.error("IDComptes is undefined. Make sure data-id is set correctly for each row.");
+      return;
+    }
+
+    // Pré-remplissez les champs du formulaire dans la fenêtre modale de modification
+    $('#nom_input').val(nom);
+    $('#Tel_input').val(Tel);
+    $('#email_input').val(email);
+    $('#adresse_input').val(adresse);
+
+    // Affichez la fenêtre modale de modification
+    $('#modifierModal').modal('show');
+  }
+
+  function confirmModification() {
+    if (!IDComptes) {
+      console.error("IDComptes is undefined. Cannot proceed with the modification.");
+      alert("Erreur : ID du compte non défini.");
+      return;
+    }
+
+    var nom = $('#nom_input').val().trim();
+    var Tel = $('#Tel_input').val().trim();
+    var email = $('#email_input').val().trim();
+    var adresse = $('#adresse_input').val().trim();
+
+    $.ajax({
+      url: 'http://localhost:3001/comptes/' + IDComptes,
+      type: 'PUT',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        nom: nom,
+        Tel: Tel,
+        email: email,
+        adresse: adresse
+      }),
+      success: function(response) {
+        console.log("Modification réussie", response);
+        // Rafraîchir la ligne correspondante du tableau
+        var selectedRow = $("#comptesTable tbody tr[data-id='" + IDComptes + "']");
+        selectedRow.find('td:eq(0)').text(nom);
+        selectedRow.find('td:eq(1)').text(Tel);
+        selectedRow.find('td:eq(2)').text(email);
+        selectedRow.find('td:eq(3)').text(adresse);
+        $('#modifierModal').modal('hide');
+      },
+      error: function(xhr, status, error) {
+        console.log("Échec de la modification", error);
+        // Afficher un message d'erreur à l'utilisateur
+        alert("Échec de la modification. Veuillez réessayer plus tard.");
+      }
+    });
+  }
+</script>
+
+
+
+
+
+<!-- TELECHARGEMENT -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+
+<script>
+  document.getElementById('download-pdf').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const table = document.getElementById('comptesTable');
+    const rows = Array.from(table.rows).map(row => Array.from(row.cells).map(cell => cell.innerText));
+
+    const headers = rows.shift(); // Remove the first row for headers
+    const data = rows;
+
+    doc.autoTable({
+      head: [headers],
+      body: data,
+    });
+
+    doc.save('comptes.pdf');
+  });
+</script>
+
+<script>
+  document.getElementById('download-excel').addEventListener('click', () => {
+    const table = document.getElementById('comptesTable');
+    const wb = XLSX.utils.table_to_book(table, {sheet: "comptes"});
+
+    XLSX.writeFile(wb, 'comptes.xlsx');
+  });
+</script>
+</html> 
+
+ 

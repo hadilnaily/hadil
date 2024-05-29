@@ -35,18 +35,7 @@ router.get('/type_publication/:type_publication', async (req, res) => {
     }
 });
 
-router.get('/media_vusiel/:media_vusiel', async (req, res) => {
-    try {
-        const compagne = await CompagneModel.findOne({  media_vusiel: req.params.media_vusiel });
-        if (!compagne) {
-            return res.status(404).json({ message: 'The compagne with the given medias_vusiels was not found.' });
-        }
-        res.status(200).json(compagne);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+
 
 //POST ajouter compagnes
 router.post('/', async (req, res) => { // Utilisez app.post() au lieu de router.post()  
@@ -98,6 +87,26 @@ router.delete('/:id', async (req, res) => {
 });
 
 
-
+// Get only nom_annanceur
+router.get('/onlynom_annanceur', async (req, res) => {
+    try {
+      const compagnes = await CompagneModel.find({}, 'nom_annanceur');
+      res.json(compagnes);
+    } catch (error) {
+      console.error('Erreur :', error);
+      res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+  });
+  
+  // Get only type_publication
+  router.get('/onlytype_publication', async (req, res) => {
+    try {
+      const compagnes = await CompagneModel.find({}, 'type_publication');
+      res.json(compagnes);
+    } catch (error) {
+      console.error('Erreur :', error);
+      res.status(500).json({ error: 'Erreur Interne du Serveur' });
+    }
+  });
 
 module.exports= router;
