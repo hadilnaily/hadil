@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>fc
+<head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Archives compagnes</title>
@@ -138,10 +138,9 @@
     </div>
   </div>
 </div>
-
+<!-- code  de la modification -->
 <script>
 var IDArchivescompagnes;
-
 function openModifierModal() {
   var checkboxChecked = $("#archivescompagnesTable tbody input[name='archivescompagnes']:checked").length > 0;
 
@@ -347,55 +346,56 @@ async function confirmModification() {
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
+<!-- n'integri biha men mongo -->
 <script>
-  // Fetch data mta3 el compagnes from the server
   async function fetchData() {
-      try {
-          const response = await fetch('http://localhost:3001/archivescompagnes/');
-          const data = await response.json();
-          return data;
-      } catch (error) {
-          console.error('Error fetching data:', error);
-          throw error; // bech n tcheki si famma erreur
-      }
-  }
+    try {
+        const response = await fetch('http://localhost:3001/archivescompagnes/');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
 
-  // Populate the table with fetched data
-  async function populateTable() {
-      try {
-          const data = await fetchData();
-          const tableBody = document.querySelector('#archivescompagnesTable tbody');
+async function populateTable() {
+    try {
+        const data = await fetchData();
+        const tableBody = document.querySelector('#archivescompagnesTable tbody');
 
-          data.forEach(function (archivescompagne) {
-              var row = document.createElement('tr');
-              let mediaElement = '';
+        data.forEach(function (archivescompagne) {
+            var row = document.createElement('tr');
+            let mediaElement = '';
 
-        if (archivescompagne.media_vusiel) {
-          if (archivescompagne.media_vusiel.endsWith('.jpg') || archivescompagne.media_vusiel.endsWith('.png')) {
-            mediaElement = `<img src="${archivescompagne.media_vusiel}" style="max-width:100px; max-height:100px;">`;
-          } else if (archivescompagne.media_vusiel.endsWith('.mp4')) {
-            mediaElement = `<video controls style="max-width:100px; max-height:100px;">
-                              <source src="${archivescompagne.media_vusiel}" type="video/mp4">
-                              Your browser does not support the video tag.
-                            </video>`;
-          }
-        }
-              row.innerHTML = `
-              <td><input type="radio" name="archivescompagnes" value="${archivescompagne._id}"></td>
-                  <td>${archivescompagne.nom_annanceur}</td>
-                  <td>${mediaElement}</td>
-                  <td>${archivescompagne.date_publication}</td>
-                  <td>${archivescompagne.date_retrait}</td>
-              `;
-              tableBody.appendChild(row);
-          });
-      } catch (error) {
-          console.error('Error populating table:', error);
-      }
-  }
+            if (archivescompagne.media_vusiel) {
+                if (archivescompagne.media_vusiel.endsWith('.jpg') || archivescompagne.media_vusiel.endsWith('.png')) {
+                    mediaElement = `<img src="${archivescompagne.media_vusiel}" style="max-width:100px; max-height:100px;">`;
+                } else if (archivescompagne.media_vusiel.endsWith('.mp4')) {
+                    mediaElement = `<video controls style="max-width:100px; max-height:100px;">
+                                      <source src="${archivescompagne.media_vusiel}" type="video/mp4">
+                                      Your browser does not support the video tag.
+                                    </video>`;
+                }
+            }
+            row.innerHTML = `
+            <td><input type="radio" name="archivescompagnes" value="${archivescompagne._id.$oid}"></td>
+                <td>${archivescompagne.nom_annanceur}</td>
+                <td>${mediaElement}</td>
+                <td>${archivescompagne.date_publication}</td>
+                <td>${archivescompagne.date_retrait}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error populating table:', error);
+    }
+}
 
-  populateTable(); // nedi el function  populateTable() awel ma tet7al el page automatique
-  </script>
+populateTable(); // nedi el function  populateTable() awel ma tet7al el page automatique
+
+</script>
 
 
 <!-- fonction ajouter -->
@@ -435,7 +435,7 @@ async function confirmModification() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 
-
+<!-- les icone pdf -->
 <script>
   document.getElementById('download-pdf').addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
@@ -455,7 +455,7 @@ async function confirmModification() {
     doc.save('archivescompagnes.pdf');
   });
 </script>
-
+<!-- les icone Exel -->
 <script>
   document.getElementById('download-excel').addEventListener('click', () => {
     const table = document.getElementById('archivescompagnesTable');

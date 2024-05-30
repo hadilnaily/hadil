@@ -294,7 +294,7 @@
               <div class="table-responsive">
                 <table class="table table-striped"  id="comptesTable" id="comptesTable" class="table">
                   <thead>
-                    <tr>
+                    <tr data-id="${comptes._id}">
                       
                       <th>Nom</th>
                       <th>Téléphone</th>
@@ -389,40 +389,132 @@
 
 </body>
 <script>
-  // Fetch data mta3 el panneaux from the server
+  // Fetch data from the server
   async function fetchData() {
-      try {
-          const response = await fetch('http://localhost:3001/comptes');
-          const data = await response.json();
-          return data;
-      } catch (error) {
-          console.error('Error fetching data:', error);
-          throw error; // bech n tcheki si famma erreur
-      }
+    try {
+      const response = await fetch('http://localhost:3001/comptes');
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error; // Check if there is an error
+    }
   }
 
   // Populate the table with fetched data
-async function populateTable() {
+  async function populateTable() {
     try {
-        const data = await fetchData();
-        const tableBody = document.querySelector('#comptesTable tbody');
+      const data = await fetchData();
+      const tableBody = document.querySelector('#comptesTable tbody');
 
-        data.forEach(function (comptes) {
-            var row = document.createElement('tr');
-            row.innerHTML = `
-   
-    <td>${comptes.nom}</td>
-    <td>${comptes.Tel}</td>
-    <td>${comptes.email}</td>
-    <td>${comptes.adresse}</td>
-    <td class="btn-group">
+      data.forEach(function (compte) {
+        var row = document.createElement('tr');
+        row.setAttribute('data-id', compte._id);
+        row.innerHTML = `
+          <td>${compte.nom}</td>
+          <td>${compte.Tel}</td>
+          <td>${compte.email}</td>
+          <td>${compte.adresse}</td>
+          <td class="btn-group">
+            <button type="button" class="btn btn-warning btn-sm me-1" onclick="openModifierModal(this)">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm me-1" onclick="deleteAction('${compte._id}')">
+              <i class="bi bi-trash"></i>
+            </button>
+            <button type="button" class="btn btn-success btn-sm toggleButton me-1" data-toggle="toggle">
+              <i class="bi bi-toggle-on"></i>
+            </button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      // Attach event listeners to toggle buttons
+      const toggleButtons = document.querySelectorAll('.toggleButton');
+      toggleButtons.forEach((button, index) => {
+        button.addEventListener('click', function () {
+          toggleActivation(index); // Call your toggleActivation function with the appropriate index
+        });
+      });
+    } catch (error) {
+      console.error('Error populating table:', error);
+    }
+  }
+
+  populateTable(); // Call the function to populate the table
+</script>
 
 
-      <!-- Boutons d'action -->
-<button type="button" class="btn btn-warning btn-sm me-1" onclick="openModifierModal(this)">
-    <i class="bi bi-pencil"></i>
-</button>
-<!-- Fenêtre modale de confirmation de modification -->
+
+  <!-- fonction modifier -->
+  <script>
+    var IDComptes;
+  
+    function openModifierModal(button) {
+      var selectedRow = $(button).closest('tr');
+      var nom = selectedRow.find('td:eq(0)').text().trim();
+      var Tel = selectedRow.find('td:eq(1)').text().trim();
+      var email = selectedRow.find('td:eq(2)').text().trim();
+      var adresse = selectedRow.find('td:eq(3)').text().trim();
+      IDComptes = selectedRow.attr('data-id');
+  
+      if (!IDComptes) {
+        console.error("IDComptes is undefined. Make sure data-id is set correctly for each row.");
+        return;
+      }
+  
+      // Pré-remplissez les champs du formulaire dans la fenêtre modale de modification
+      $('#nom_input').val(nom);
+      $('#Tel_input').val(Tel);
+      $('#email_input').val(email);
+      $('#adresse_input').val(adresse);
+  
+      // Affichez la fenêtre modale de modification
+      $('#modifierModal').modal('show');
+    }
+  
+    function confirmModification() {
+      if (!IDComptes) {
+        console.error("IDComptes is undefined. Cannot proceed with the modification.");
+        alert("Erreur : ID du compte non défini.");
+        return;
+      }
+  
+      var nom = $('#nom_input').val().trim();
+      var Tel = $('#Tel_input').val().trim();
+      var email = $('#email_input').val().trim();
+      var adresse = $('#adresse_input').val().trim();
+  
+      $.ajax({
+        url: 'http://localhost:3001/comptes/' + IDComptes,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          nom: nom,
+          Tel: Tel,
+          email: email,
+          adresse: adresse
+        }),
+        success: function(response) {
+          console.log("Modification réussie", response);
+          // Rafraîchir la ligne correspondante du tableau
+          var selectedRow = $("#comptesTable tbody tr[data-id='" + IDComptes + "']");
+          selectedRow.find('td:eq(0)').text(nom);
+          selectedRow.find('td:eq(1)').text(Tel);
+          selectedRow.find('td:eq(2)').text(email);
+          selectedRow.find('td:eq(3)').text(adresse);
+          $('#modifierModal').modal('hide');
+        },
+        error: function(xhr, status, error) {
+          console.log("Échec de la modification", error);
+          // Afficher un message d'erreur à l'utilisateur
+          alert("Échec de la modification. Veuillez réessayer plus tard.");
+        }
+      });
+    }
+  </script>
+  <!-- Fenêtre modale de confirmation de modification -->
 <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -433,19 +525,19 @@ async function populateTable() {
       <div class="modal-body">
         <form id="modificationForm">
           <div class="mb-3">
-            <label for="dateDebutPromo" class="form-label">Nom:</label>
+            <label for="nom_input" class="form-label">Nom:</label>
             <input type="text" class="form-control" id="nom_input">
           </div>
           <div class="mb-3">
-            <label for="dateFinPromo" class="form-label">Téléphone:</label>
+            <label for="Tel_input" class="form-label">Téléphone:</label>
             <input type="text" class="form-control" id="Tel_input">
           </div>
           <div class="mb-3">
-            <label for="prixNative" class="form-label">Email:</label>
+            <label for="email_input" class="form-label">Email:</label>
             <input type="text" class="form-control" id="email_input">
           </div>
           <div class="mb-3">
-            <label for="promo" class="form-label">Adresse:</label>
+            <label for="adresse_input" class="form-label">Adresse:</label>
             <input type="text" class="form-control" id="adresse_input">
           </div>
         </form>
@@ -458,58 +550,6 @@ async function populateTable() {
   </div>
 </div>
 
-
-
-
-        <button type="button" class="btn btn-danger btn-sm me-1" data-bs-target="#confirmDeleteModal" onclick=deleteAction("${comptes._id}")>
-  <i class="bi bi-trash"></i>
-</button>
-
-        <!-- Modal de confirmation de suppression des comptes -->
-<div class="modal fade" id="confirmDeleteModalComptes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sûr de vouloir supprimer ce compte ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-        <button type="button" class="btn btn-success btn-sm toggleButton me-1" data-toggle="toggle" onclick="attachToggleListeners()">
-            <i class="bi bi-toggle-on"></i>
-        </button>
-    </td>
-`;
-
-            tableBody.appendChild(row);
-        });
-
-        // Attach event listeners to toggle buttons
-        const toggleButtons = document.querySelectorAll('.toggleButton');
-        toggleButtons.forEach((button, index) => {
-            button.addEventListener('click', function () {
-                toggleActivation(index); // Call your toggleActivation function with appropriate index
-            });
-        });
-    } catch (error) {
-        console.error('Error populating table:', error);
-    }
-}
-
-populateTable(); // Call the function to populate the table
-
-  </script>
 
  <!-- fonction ajouter -->
  <script>
@@ -540,6 +580,8 @@ populateTable(); // Call the function to populate the table
     
     
     </script>
+
+
 <script>
   // Fonction pour confirmer la suppression
 function deleteAction(id) {
@@ -570,73 +612,8 @@ function deleteAction(id) {
 </script>
 
 
-<!-- fonction modifier -->
-<script>
-  var IDComptes;
 
-  function openModifierModal(button) {
-    var selectedRow = $(button).closest('tr');
-    var nom = selectedRow.find('td:eq(0)').text().trim();
-    var Tel = selectedRow.find('td:eq(1)').text().trim();
-    var email = selectedRow.find('td:eq(2)').text().trim();
-    var adresse = selectedRow.find('td:eq(3)').text().trim();
-    IDComptes = selectedRow.data('id');
 
-    if (!IDComptes) {
-      console.error("IDComptes is undefined. Make sure data-id is set correctly for each row.");
-      return;
-    }
-
-    // Pré-remplissez les champs du formulaire dans la fenêtre modale de modification
-    $('#nom_input').val(nom);
-    $('#Tel_input').val(Tel);
-    $('#email_input').val(email);
-    $('#adresse_input').val(adresse);
-
-    // Affichez la fenêtre modale de modification
-    $('#modifierModal').modal('show');
-  }
-
-  function confirmModification() {
-    if (!IDComptes) {
-      console.error("IDComptes is undefined. Cannot proceed with the modification.");
-      alert("Erreur : ID du compte non défini.");
-      return;
-    }
-
-    var nom = $('#nom_input').val().trim();
-    var Tel = $('#Tel_input').val().trim();
-    var email = $('#email_input').val().trim();
-    var adresse = $('#adresse_input').val().trim();
-
-    $.ajax({
-      url: 'http://localhost:3001/comptes/' + IDComptes,
-      type: 'PUT',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        nom: nom,
-        Tel: Tel,
-        email: email,
-        adresse: adresse
-      }),
-      success: function(response) {
-        console.log("Modification réussie", response);
-        // Rafraîchir la ligne correspondante du tableau
-        var selectedRow = $("#comptesTable tbody tr[data-id='" + IDComptes + "']");
-        selectedRow.find('td:eq(0)').text(nom);
-        selectedRow.find('td:eq(1)').text(Tel);
-        selectedRow.find('td:eq(2)').text(email);
-        selectedRow.find('td:eq(3)').text(adresse);
-        $('#modifierModal').modal('hide');
-      },
-      error: function(xhr, status, error) {
-        console.log("Échec de la modification", error);
-        // Afficher un message d'erreur à l'utilisateur
-        alert("Échec de la modification. Veuillez réessayer plus tard.");
-      }
-    });
-  }
-</script>
 
 
 
